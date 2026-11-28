@@ -35,6 +35,10 @@ SPRINGS = (
 # swing reaches the lower plates later. Knots from the cloth bench (tools/cloth_bench.py): 55/42/31/22 for 4 plates.
 PLATE_K = (55.0, 42.0, 31.0, 22.0)
 PLATE_DAMPING, PLATE_MAX_DEG = 7.0, 75.0
+# The spring pulls on the TIP's position, so its angular pull against gravity, wind and the arm's acceleration scales
+# with the tip length: a 4.5 cm band on a 4.5 cm tip flopped up to 178 deg on Kojiro's strike (28 Nov bench). The
+# stiffnesses above were tuned on the cloth bench's 12 cm plates, so a plate's spring runs at least that long.
+PLATE_TIP_M = 0.12
 
 
 def plate_stiffness(j, n):
@@ -51,7 +55,7 @@ def plate_springs(rig):
     for name, e in rig.J.items():
         if 'pc_plate' in e:
             sd = str(e.get('pc_plate_side', 'R'))
-            out.append((int(e['pc_plate']), name, float(e['pc_plate_len']),
+            out.append((int(e['pc_plate']), name, max(PLATE_TIP_M, float(e['pc_plate_len'])),
                         plate_stiffness(int(e['pc_plate']), int(e['pc_plates'])), PLATE_DAMPING, PLATE_MAX_DEG,
                         ('forearm.' + sd, 'upperarm.' + sd)))
     return [t[1:] for t in sorted(out, key=lambda t: (t[0], t[1]))]
@@ -79,6 +83,7 @@ class ClothSprings:
         self.frame = 0
         self.roots = {}                              # joint -> its root last frame (to see a teleport at a cut)
         self.resets = []                             # (frame, joint) where a teleport restarted the cloth
+        self.hinge_inside = []                       # (frame, plate) whose hinge was inside the body: not cleared
 
     def wind_at(self, t):
         """The wind's push on a cloth tip at time t (world m/s^2): a steady part plus slow gusts and a flutter, the
@@ -137,10 +142,18 @@ class ClothSprings:
             self.caps.update()
         for name, L, k, c, max_deg, skip in self.spec:
             e = self.rig.J[name]
-            if 'pc_rest_rot' in e:
-                # a plate's rule is its REST place on the plate above (the parent carries it): reset it first, or
-                # last frame's swing would become this frame's aim and the spring would have nothing to pull back to
-                e.rotation_euler = tuple(e['pc_rest_rot'])
+            if 'pc_plate' in e:
+                # a plate's rule: the hang line of the whole chain, where the ARM carries plate 0 (as tools/cloth_bench.py
+                # LAYERED). The plate above carries only its hinge; aiming at the plate above stacked every plate's
+                # lean on the next (175 deg at the hem on Kojiro's strike). Set every frame, or last frame's swing
+                # would become this frame's aim and the spring would have nothing to pull back to.
+                b = e
+                while 'pc_plate' in b.parent:
+                    b = b.parent
+                from mathutils import Euler
+                chain = (b.parent.matrix_world.to_quaternion()
+                         @ Euler(tuple(b['pc_rest_rot']), 'YZX').to_quaternion() @ DOWN).normalized()
+                self._aim(e, chain)
                 bpy.context.view_layer.update()
             root = e.matrix_world.translation.copy()
             want = (e.matrix_world.to_quaternion() @ DOWN).normalized()   # where the rule aims it now
@@ -188,7 +201,10 @@ class ClothSprings:
                 self.depths.setdefault(name, []).append((max(0.0, before), max(0.0, after)))
             self.state[name] = (p, v)
             self._aim(e, (p - root).normalized())
-            if name in self.panels and self.body is not None:
+            hinge_in = 'pc_plate' in e and self.body is not None and self.body.update().depth(root, skip=skip)[0] > 0
+            if hinge_in:                             # a plate hinged INSIDE the body (its arm is in the chest): no
+                self.hinge_inside.append((self.frame, name))   # turn can clear it, the search only spins the plate
+            if name in self.panels and self.body is not None and not hinge_in:
                 p = self._clear_panel(name, e, root, L, skip)
                 self.state[name] = (p, self.state[name][1])
             self.log.setdefault(name, []).append((round(math.degrees((p - root).normalized().angle(want, 0.0)), 1),
