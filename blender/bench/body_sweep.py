@@ -221,7 +221,7 @@ def main():
             c2, h2 = MB.frame(ch['objects'])
             a = math.radians(float(arg('angle', 34)))
             d2 = 2.0 * 2.55
-            MB.camera(scene, (-math.sin(a) * d2, -math.cos(a) * d2, 1.0), (0, 0, 0.85), 60)
+            MB.camera(scene, (-math.sin(a) * d2, -math.cos(a) * d2, 1.0), (0, 0, float(arg('look', 0.85))), float(arg('lens', 60)))
             MB.render(scene, f'{out}-{nm}.png')
     with open(out + '.json', 'w') as fh:
         json.dump(res, fh, indent=1)

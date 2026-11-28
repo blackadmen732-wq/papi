@@ -486,6 +486,38 @@ def parent_rigid(ob, joint):
     return ob
 
 
+def skin_skirt(ob, rig, waist=0.93, hem=0.52, half=0.40, centre=1.0):
+    """Weight a SKIRT (the hakama top: one cloth over both legs) between the hips and the two thighs.
+
+    Inverse distance to the three bones tore it (28 Nov, blender/bench/body_sweep.py: edges stretched 4.3x, 267 edges
+    past double in the extreme sweep): a vertex between the legs went to whichever thigh was nearer, so in a lunge the
+    cloth over the crotch was pulled apart between a thigh going forward and one going back. Here the weights are
+    smooth fields over the rest shape: the thighs take over with depth below the waist (smoothstep), more on the
+    outside of each leg than in the middle (the middle keeps `centre` of it at most), shared left/right by a
+    smoothstep across the body. Neighbouring vertices therefore always have neighbouring weights: nothing tears.
+    Tuned on the extreme sweep (Kojiro, 7 poses): centre 0.35 / half 0.16 -> 409 edges past double; half 0.40, the
+    hem fully on the legs (centre 1.0) -> 0, the worst edge 1.78x (was 4.3x). Dual-quaternion skinning was worse."""
+    gs = {b: ob.vertex_groups.new(name=b) for b in ('hips', 'lthigh', 'rthigh')}
+    M = ob.matrix_world
+
+    def sm(t):
+        t = min(1.0, max(0.0, t))
+        return t * t * (3.0 - 2.0 * t)
+    for v in ob.data.vertices:
+        w = M @ v.co
+        down = sm((waist - w.z) / (waist - hem))
+        side = max(-1.0, min(1.0, w.x / half))
+        legs = down * (centre + (1.0 - centre) * sm(abs(side)))
+        left = sm((side + 1.0) / 2.0)
+        gs['lthigh'].add([v.index], legs * left, 'REPLACE')
+        gs['rthigh'].add([v.index], legs * (1.0 - left), 'REPLACE')
+        gs['hips'].add([v.index], 1.0 - legs, 'REPLACE')
+    mod = ob.modifiers.new('skin', 'ARMATURE')
+    mod.object = rig
+    ob['pc_bind'] = 'skirt:hips,lthigh,rthigh'
+    return ob
+
+
 def bind_foot_toe(ob, rig, foot, toe, band=0.03):
     """A FOOT split at the ball (28 Nov): what is ahead of the toe joint rides the toe bone, the heel the foot bone,
     blended over `band` metres across the ball so the fold never tears. A sandal was one rigid piece on the foot
@@ -606,6 +638,9 @@ def build(recipe, *, pose='standing', location=(0, 0, 0), yaw=0.0, collection=No
         kind, bone, bones = bind[ob.name]
         if kind == 'hang' and len(ob.data.vertices) and len(bones) >= 2:
             skin_hang(ob, rig.rig, bones[0], bones[1])   # bones = [sewn, cloth]
+            ob.parent = rig.rig
+        elif kind == 'skin' and set(bones) == {'hips', 'lthigh', 'rthigh'} and len(ob.data.vertices):
+            skin_skirt(ob, rig.rig)                       # the hakama top: a skirt over two legs (28 Nov)
             ob.parent = rig.rig
         elif kind in ('skin', 'hang') and len(ob.data.vertices):
             skin_object(ob, rig.rig, bones)
