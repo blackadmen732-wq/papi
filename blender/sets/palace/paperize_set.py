@@ -4,8 +4,8 @@ built set, at ARCHITECTURE scale, then render its camera anchors. Mark, 28 Nov: 
 look of his paper-craft boards; with photo textures or plain paper materials alone it read as a realistic 3D castle.
 
   B=/opt/blender-dl/blender-4.5.16-linux-x64/blender
-  nice -n 15 $B -b -t 2 -P blender/sets/palace/paperize_set.py -- --blend output/sets/dev/palace-island.blend \
-      --out output/sets/dev/palace-island-folded --cams CAM_sea,CAM_texture [--width 0.06] [--angle 30] [--res 540x960]
+  nice -n 15 $B -b -t 2 -P blender/sets/palace/paperize_set.py -- --blend output/sets/palace-island.blend \
+      --out output/sets/palace-island-folded --cams CAM_sea,CAM_texture [--width 0.06] [--angle 30] [--res 540x960]
 
 Why other numbers than the characters': a character's ink line is 3.5 mm wide because it is seen from 1-3 m; a keep
 seen from 50 m with a 35 mm lens has about 5 cm per pixel at 540 px, so the line is `width` 6 cm and the mottle is
