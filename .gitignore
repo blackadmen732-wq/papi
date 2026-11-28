@@ -15,4 +15,6 @@ graphify-out/
 # Outside tools: fetched by `node tools/vendor.mjs` at the commits vendor/MANIFEST.json pins.
 # The manifest is the contract and IS committed; the checkouts are a cache and are not.
 vendor/*/
-assets/models/ai/*/color.png
+# assets/models/ai/*/color.png used to be ignored (regenerable from the Tripo originals by tools/ai_part.py), but the
+# originals are not in git, so a fresh machine could not bake a film that wears them (28 Nov: all three render helpers
+# stopped at bokken_oar_t1/color.png). They are small (9 MB for all ten) and now committed.
