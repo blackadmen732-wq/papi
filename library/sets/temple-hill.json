@@ -56,7 +56,7 @@
   "cameras": {
     "CAM_approach": {"pos": [2.6, -51, 1.6], "look": [-1.0, -12, 10.5], "lens": 28, "note": "from the valley at the foot of the stair: the torii, the stair climbing the hill, the pagoda and the hall above in the pines"},
     "CAM_terrace": {"pos": [0.0, -21.5, 7.9], "look": [-0.6, 2, 8.6], "lens": 30, "note": "from the top of the stair through the shrine torii: the lantern path to the hall, the pagoda to the left"},
-    "CAM_wide": {"pos": [30, -36, 17], "look": [-3.5, -1, 8.5], "lens": 28, "note": "high from the south-east: the whole hill rising from the mist, shrine and pagoda among pines"}
+    "CAM_wide": {"pos": [24, -29, 14], "look": [-5, 1, 10.5], "lens": 28, "note": "high from the south-east: the whole hill rising from the mist, shrine and pagoda among pines"}
   },
   "preview_cams": ["CAM_approach", "CAM_terrace", "CAM_wide"],
   "render": {"samples": 16, "res": "540x960"}

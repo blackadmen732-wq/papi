@@ -50,7 +50,7 @@
     "CAM_sea": {"pos": [-38, -18, 2.2], "look": [2, 42, 14], "lens": 28, "note": "low over the water from the south-west: the castle dark against the dawn, the islet and the bridge in front"},
     "CAM_front": {"pos": [6, -6, 5], "look": [0, 30, 12], "lens": 35, "note": "the sea gate and the keep head-on"},
     "CAM_aerial": {"pos": [-70, 0, 48], "look": [2, 42, 8], "lens": 32, "note": "the whole island from above"},
-    "CAM_courtyard": {"pos": [-8.5, 24.5, 9.4], "look_mark": "MARK_center", "look_z": 1.5, "lens": 30, "note": "on the courtyard: the duel line across the frame, the keep behind"},
+    "CAM_courtyard": {"pos": [-1.2, 27.3, 8.9], "look_mark": "MARK_center", "look_z": 1.6, "lens": 24, "note": "from inside the sea gate: the courtyard and the duel line, the keep behind"},
     "CAM_texture": {"pos": [34, 82, 10], "look": [2, 44, 12], "lens": 35, "note": "from the north: the low sun on the stone, plaster and roofs (the paper textures)"}
   },
   "preview_cams": ["CAM_sea", "CAM_front", "CAM_aerial", "CAM_texture"],
