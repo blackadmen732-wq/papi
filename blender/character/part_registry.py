@@ -58,18 +58,20 @@ REST = {
     'rT': (-0.23, 0.0, 1.09), 'rH': (-0.23, 0.0, 0.80), 'rSleeve': (-0.23, 0.0, 0.99),
     'lthigh': (0.10, 0.0, 0.92), 'lshin': (0.10, 0.0, 0.46), 'lfoot': (0.10, 0.0, 0.02),
     'rthigh': (-0.10, 0.0, 0.92), 'rshin': (-0.10, 0.0, 0.46), 'rfoot': (-0.10, 0.0, 0.02),
+    # the TOE joint at the ball of the foot, on the sole (engine/figure.js LEG.toeZ / toeY): heel rises, toes stay flat
+    'ltoe': (0.10, -0.10, 0.0), 'rtoe': (-0.10, -0.10, 0.0),
 }
 # Bones whose tail cannot be guessed from a child joint, because they have no child. Without this a
 # childless bone gets a stub tail pointing straight up (see modular_builder._build_armature), which
 # both leaves its rest orientation wrong and, since skin weights are inverse distance to the bone's
 # rest SEGMENT, hands its own cloth to the arm bones instead. The sleeve bone runs DOWN the tamoto.
-TAIL = {'lSleeve': (0.23, 0.0, 0.74), 'rSleeve': (-0.23, 0.0, 0.74)}
+TAIL = {'lSleeve': (0.23, 0.0, 0.74), 'rSleeve': (-0.23, 0.0, 0.74), 'ltoe': (0.10, -0.17, 0.0), 'rtoe': (-0.10, -0.17, 0.0)}
 
 PARENT = {'hips': 'root', 'torso': 'hips', 'upper': 'torso', 'neck': 'upper', 'head': 'neck', 'hakama': 'hips',
           'lC': 'upper', 'lS': 'lC', 'lE': 'lS', 'lT': 'lE', 'lH': 'lT', 'lSleeve': 'lT',
           'rC': 'upper', 'rS': 'rC', 'rE': 'rS', 'rT': 'rE', 'rH': 'rT', 'rSleeve': 'rT',
           'lthigh': 'root', 'lshin': 'lthigh', 'lfoot': 'lshin',
-          'rthigh': 'root', 'rshin': 'rthigh', 'rfoot': 'rshin'}
+          'rthigh': 'root', 'rshin': 'rthigh', 'rfoot': 'rshin', 'ltoe': 'lfoot', 'rtoe': 'rfoot'}
 
 # --------------------------------------------------------------------------- sockets
 # A socket is where a part clips on: a position in the rest pose, the direction the part grows in ('up',

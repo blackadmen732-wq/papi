@@ -820,15 +820,15 @@ const _legM = new THREE.Matrix4(), _legV = new THREE.Vector3(), _legE = new THRE
  *  and that ankle. A planted foot that cannot be reached flat (the back foot of a lunge or a thrust) rises onto its
  *  toes instead of stretching the leg (until 28 Nov it stretched up to 9%: tsuki-thrust's back leg) or dragging the
  *  hips down. Past LEG.heelMax the foot slides in toward the body. Figure-frame metres, foot pointing +z. */
-export function heelRaise(hx, hy, hz, fx, fy, fz, reach) {
+export function heelRaise(hx, hy, hz, fx, fy, fz, reach, q0 = 0) {
   const at = (q) => [fy + LEG.toeY + (-LEG.toeY) * Math.cos(q) + LEG.toeZ * Math.sin(q),
     fz + LEG.toeZ + (-LEG.toeY) * Math.sin(q) - LEG.toeZ * Math.cos(q)];
   const dist = (q) => { const [y, z] = at(q); return Math.hypot(fx - hx, y - hy, z - hz); };
-  if (dist(0) <= reach) return { q: 0, fy, fz, fx };
-  let lo = 0, hi = LEG.heelMax;
-  if (dist(hi) >= dist(0)) {                           // a foot ahead of the hip gains nothing on its toes: slide it in
-    const h = Math.max(0, reach * reach - (fx - hx) ** 2 - (fy - hy) ** 2);
-    return { q: 0, fx, fy, fz: hz + Math.sign(fz - hz) * Math.sqrt(h) };
+  if (dist(q0) <= reach) { const [y, z] = at(q0); return { q: q0, fx, fy: y, fz: z }; }
+  let lo = q0, hi = Math.max(q0, LEG.heelMax);
+  if (dist(hi) >= dist(q0)) {                          // a foot ahead of the hip gains nothing on its toes: slide it in
+    const [y, z] = at(q0), h = Math.max(0, reach * reach - (fx - hx) ** 2 - (y - hy) ** 2);
+    return { q: q0, fx, fy: y, fz: hz + Math.sign(z - hz) * Math.sqrt(h) };
   }
   if (dist(hi) > reach) {                              // on the toes and still too far: slide the foot in along the ground
     const [y, z] = at(hi), h = Math.max(0, reach * reach - (fx - hx) ** 2 - (y - hy) ** 2);
@@ -860,8 +860,11 @@ export function solveLegs(f, p) {
       fz += Math.sin(ph) * p.stride / 2;
       fy += Math.max(0, Math.cos(ph)) * 0.07;
     }
-    if (!p._feet && fy <= LEG.footY + 1e-6) {        // a foot on the ground: past the reach it rises onto its toes
-      const r = heelRaise(hx, hy, hz, fx, fy, fz, (L1 + L2) * 1.012);
+    // a foot on the ground: past the reach it rises onto its toes. An ankle pointed down (rax / lax > 0) on the ground
+    // is a heel raised about the ball too, not a sole driven into the ground about the ankle (drive-contact: 7 cm deep)
+    const ank = front ? (p.rax ?? 0) : (p.lax ?? 0), q0 = Math.max(0, ank);
+    if (!p._feet && fy <= LEG.footY + 1e-6) {
+      const r = heelRaise(hx, hy, hz, fx, fy, fz, (L1 + L2) * 1.012, q0);
       heel = r.q; fx = r.fx; fy = r.fy; fz = r.fz;
     }
     // roll the leg plane sideways so it contains the hip→foot line, then solve inside that plane
@@ -917,7 +920,7 @@ export function solveLegs(f, p) {
     // flat on the ground (+ ankle), minus the walking roll from engine/footlock.js (+ toe up: heel strike / toe-off),
     // plus the heel the reach rule raised (the foot turns toe-down about its toe joint)
     const pitch = p._feet ? ((front ? p._feet.pr : p._feet.pl) ?? 0) : 0;
-    leg.foot.rotation.x = shinAng + (front ? (p.rax ?? 0) : (p.lax ?? 0)) - pitch + heel;
+    leg.foot.rotation.x = shinAng + ank - pitch + (heel > 0 ? heel - q0 : 0);
     // THE TOE stays flat on the ground while the heel is up: the reach rule's heel, or a foot plan that turns the heel
     // about the ball (`_feet.ball`; a plan that pivots on the toe TIP keeps the sandal rigid, as before), + rtx / ltx
     const ballUp = p._feet?.ball ? Math.max(0, -pitch) : 0;

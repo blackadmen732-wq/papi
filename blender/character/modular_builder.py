@@ -26,7 +26,7 @@ import sys
 
 import bmesh
 import bpy
-from mathutils import Matrix, Quaternion, Vector
+from mathutils import Euler, Matrix, Quaternion, Vector
 from mathutils.bvhtree import BVHTree
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -52,7 +52,11 @@ POSES = json.load(open(os.path.join(REPO, 'library', 'poses.json')))
 BASE = dict(x=0, y=0, z=0, ry=0, rx=0, rz=0, tx=0, ty=0, tz=0, hx=0, hy=0, hz=0, rsx=0.05, rsz=0.12, rex=-0.15,
             lsx=0.05, lsz=-0.12, lex=-0.15, rwx=0, lwx=0, rwz=0, lwz=0, sway=0, swayx=0, stance=0.12, crouch=0,
             weight=0, cx=0, cy=0, cz=0, nx=0, ny=0, rcy=0, rcz=0, lcy=0, lcz=0, rsy=0, lsy=0, rfy=0, lfy=0,
-            rax=0, lax=0)
+            rax=0, lax=0, px=0, py=0, pz=0, rtx=0, ltx=0)
+# engine/figure.js LEG, the same numbers (28 Nov: posed hips and ankles = the rest skeleton, soft IK from 0.99, a toe
+# joint at the ball, the heel-raise reach rule, the knee limit). Keep the two in step: legs_match.py proves they are.
+LEG = dict(thigh=0.46, shin=0.44, hipY=0.92, hipDrop=0.0, footY=0.02, soft=0.99, toeZ=0.10, toeY=-0.02,
+           heelMax=0.6, kneeMax=2.7, hipW=0.1)
 POSES.setdefault('standing', {'tx': 0.06, 'hx': 0.22, 'nx': 0.1, 'rsx': -0.55, 'rsz': 0.35, 'rex': -1.4,
                               'lsx': -0.5, 'lsz': -0.4, 'lex': -1.45, 'stance': 0.18})
 
@@ -60,6 +64,39 @@ POSES.setdefault('standing', {'tx': 0.06, 'hx': 0.22, 'nx': 0.1, 'rsx': -0.55, '
 def T(x, y, z):
     """three.js (figure.js) coordinates → Blender."""
     return Vector((x, -z, y))
+
+
+def heel_raise(hx, hy, hz, fx, fy, fz, reach, q0=0.0):
+    """engine/figure.js heelRaise: the heel-up angle (about the toe joint on the ground) that brings a stance ankle
+    within `reach` of the hip, then a slide in along the ground. Returns (q, fx, fy, fz), figure.js axes."""
+    tz, ty = LEG['toeZ'], LEG['toeY']
+
+    def at(q):
+        return (fy + ty + (-ty) * math.cos(q) + tz * math.sin(q), fz + tz + (-ty) * math.sin(q) - tz * math.cos(q))
+
+    def dist(q):
+        y, z = at(q)
+        return math.sqrt((fx - hx) ** 2 + (y - hy) ** 2 + (z - hz) ** 2)
+    if dist(q0) <= reach:
+        y, z = at(q0)
+        return q0, fx, y, z
+    lo, hi = q0, max(q0, LEG['heelMax'])
+    if dist(hi) >= dist(q0):                        # a foot ahead of the hip gains nothing on its toes: slide it in
+        y, z = at(q0)
+        h = max(0.0, reach * reach - (fx - hx) ** 2 - (y - hy) ** 2)
+        return q0, fx, y, hz + math.copysign(math.sqrt(h), z - hz)
+    if dist(hi) > reach:
+        y, z = at(hi)
+        h = max(0.0, reach * reach - (fx - hx) ** 2 - (y - hy) ** 2)
+        return hi, fx, y, hz + math.copysign(math.sqrt(h), z - hz)
+    for _ in range(24):
+        mid = (lo + hi) / 2
+        if dist(mid) > reach:
+            lo = mid
+        else:
+            hi = mid
+    y, z = at(hi)
+    return hi, fx, y, z
 
 
 # =========================================================================== the shared rig
@@ -86,7 +123,7 @@ class Rig:
         # is 'YXZ' (facing first, then the lean: a forward lean leans forward whatever way the body faces) and the
         # THIGHS are 'ZXY' (bend in the leg plane, then roll the plane: hip abduction). Until 28 Nov all were 'YZX':
         # a lean on a body facing 2.3 rad came out mostly sideways; a rolled leg plane bent the wrong way.
-        if n == 'root':
+        if n in ('root', 'hips'):                         # the pelvis turns first too (figure.js hips: 'YXZ')
             e.rotation_mode = 'YXZ'
         elif n.endswith('thigh'):
             e.rotation_mode = 'XYZ'
@@ -114,6 +151,7 @@ class Rig:
             self._joint(s + 'thigh', 'root', (sgn * 0.1, 0.92, 0))
             self._joint(s + 'shin', s + 'thigh', (0, -0.46, 0))
             self._joint(s + 'foot', s + 'shin', (0, -0.44, 0))
+            self._joint(s + 'toe', s + 'foot', (0, LEG['toeY'], LEG['toeZ']))
         bpy.context.view_layer.update()
 
     def _build_armature(self):
@@ -190,9 +228,10 @@ class Rig:
         J = self.J
         J['root'].location = T(p['x'], p['y'], p['z'])
         self.rot('root', p['rx'], p['ry'], p['rz'])
-        hipY = 0.92 - p['crouch']
+        hipY = LEG['hipY'] - p['crouch']
         hipZ = p['weight'] * p['stance'] * 0.35
         J['hips'].location = T(0, hipY, hipZ)
+        self.rot('hips', p.get('px', 0.0), p.get('py', 0.0), p.get('pz', 0.0))
         self.rot('torso', p['tx'] + p['weight'] * 0.05, p['ty'], p['tz'])
         self.rot('upper', p['cx'], p['cy'], p['cz'])
         self.rot('neck', p['nx'], p['ny'], 0)
@@ -203,7 +242,7 @@ class Rig:
         self.rot('rT', 0, p['rfy'], 0); self.rot('lT', 0, p['lfy'], 0)
         self.rot('rH', p['rwx'], 0, p['rwz']); self.rot('lH', p['lwx'], 0, p['lwz'])
         self.rot('hakama', p['swayx'], 0, p['sway'])
-        self._solve_legs(p, hipY - 0.02, hipZ)
+        self._solve_legs(p, hipY - LEG['hipDrop'], hipZ)
         bpy.context.view_layer.update()
         self._hang_sleeves(p)
         bpy.context.view_layer.update()
@@ -220,7 +259,7 @@ class Rig:
         Soft IK and the stretch that pays its shortfall back, the leg plane rolled sideways to contain the hip-foot
         line, and the foot's pitch (`_feet.pr` / `.pl`, + toe up: heel strike and toe-off) as in figure.js."""
         J = self.J
-        L1, L2 = 0.46, 0.44
+        L1, L2 = LEG['thigh'], LEG['shin']
         feet = p.get('_feet')
         inv = None
         if feet:
@@ -230,10 +269,16 @@ class Rig:
             else:
                 bpy.context.view_layer.update()
                 inv = root.matrix_world.inverted()
+        px, py, pz = p.get('px', 0.0) or 0.0, p.get('py', 0.0) or 0.0, p.get('pz', 0.0) or 0.0
+        pel = (px, py, pz) != (0.0, 0.0, 0.0)
         for s, side in (('r', -1), ('l', 1)):
             front = side < 0
-            fx, fy, fz = side * 0.1, 0.04, (1 if front else -1) * p['stance'] / 2
-            pitch = 0.0
+            hx, hy_, hz_ = side * LEG['hipW'], hy, hzz
+            if pel:                                        # the pelvis carries the hip joint (three.js YXZ = Blender YXZ)
+                o = Euler((px, -pz, py), 'YXZ').to_matrix() @ T(side * LEG['hipW'], 0, 0)
+                hx, hy_, hz_ = o.x, hy + o.z, hzz - o.y
+            fx, fy, fz = side * 0.1, LEG['footY'], (1 if front else -1) * p['stance'] / 2
+            pitch, heel = 0.0, 0.0
             if feet:
                 w = feet['r' if front else 'l']
                 v = inv @ T(w[0], w[1], w[2])              # the root's frame, Blender axes
@@ -243,37 +288,49 @@ class Rig:
                 ph = p.get('phase', 0.0) + (0.0 if front else math.pi)
                 fz += math.sin(ph) * p['stride'] / 2
                 fy += max(0.0, math.cos(ph)) * 0.07
-            sx, sy = fx - side * 0.1, fy - hy
+            ank = p['rax'] if front else p['lax']
+            q0 = max(0.0, ank)                             # an ankle pointed down on the ground: a heel raised on the ball
+            if not feet and fy <= LEG['footY'] + 1e-6:     # a foot on the ground: past the reach, onto its toes
+                heel, fx, fy, fz = heel_raise(hx, hy_, hz_, fx, fy, fz, (L1 + L2) * 1.012, q0)
+            sx, sy = fx - hx, fy - hy_
             roll = math.atan2(sx, -sy) + (0.0 if feet else side * 0.04)   # the splay: a stance foot only
-            dz, dy = fz - hzz, -math.hypot(sx, sy)
+            dz, dy = fz - hz_, -math.hypot(sx, sy)
             d = math.hypot(dz, dy)
             true_d = d
             mx = (L1 + L2) * 0.999
-            ds = (L1 + L2) * (float(feet.get('soft', 0.94) or 0.94) if feet else 0.94)   # soft IK: eases onto mx
-            if d > ds:
+            ds = (L1 + L2) * (float(feet.get('soft', LEG['soft']) or LEG['soft']) if feet else LEG['soft'])
+            if d > ds:                                     # soft IK: eases onto mx
                 room = mx - ds
                 soft = mx - room * math.exp(-(d - ds) / room)
                 if d > 1e-6:
                     dz *= soft / d
                     dy *= soft / d
                 d = soft
+            dmin = math.sqrt(L1 * L1 + L2 * L2 + 2 * L1 * L2 * math.cos(LEG['kneeMax']))   # the knee limit
+            if 1e-6 < d < dmin:
+                dz *= dmin / d
+                dy *= dmin / d
+                d = dmin
             phi = math.atan2(dz, -dy)
             a = math.acos(max(-1, min(1, (L1 * L1 + d * d - L2 * L2) / (2 * L1 * max(d, 1e-6)))))
             th = phi + a
-            kz, ky = hzz + L1 * math.sin(th), hy - L1 * math.cos(th)
-            sh = math.atan2(hzz + dz - kz, -(hy + dy - ky))
-            J[s + 'thigh'].location = T(side * 0.1, hy, hzz)
+            kz, ky = hz_ + L1 * math.sin(th), hy_ - L1 * math.cos(th)
+            sh = math.atan2(hz_ + dz - kz, -(hy_ + dy - ky))
+            J[s + 'thigh'].location = T(hx, hy_, hz_)
             self.rot(s + 'thigh', -th, 0, roll)            # Euler XYZ here = figure.js's ZXY (bend, then roll)
-            J[s + 'thigh'].scale = (1.0,) * 3 if d < 1e-6 else (true_d / d,) * 3
+            J[s + 'thigh'].scale = (1.0,) * 3 if d < 1e-6 else (max(1.0, true_d / d),) * 3
             self.rot(s + 'shin', -(sh - th), 0, 0)
             twist = 0.0                                    # the planted foot's own direction (figure.js: yr / yl)
             if feet and feet.get('y' + ('r' if front else 'l')) is not None:
                 d_ = float(feet['y' + ('r' if front else 'l')]) - p['ry']
                 tw = float(feet.get('twist', 1.05) or 1.05)
                 twist = max(-tw, min(tw, math.atan2(math.sin(d_), math.cos(d_))))
-            self.rot(s + 'foot', sh + (p['rax'] if front else p['lax']) - pitch, twist, 0)
+            self.rot(s + 'foot', sh + ank - pitch + (heel - q0 if heel > 0 else 0.0), twist, 0)
+            # the toe stays flat while the heel is up (the reach rule's heel, or a foot plan pivoting on the ball)
+            ball_up = max(0.0, -pitch) if (feet and feet.get('ball')) else 0.0
+            self.rot(s + 'toe', -(heel + ball_up) - (p.get('rtx', 0.0) if front else p.get('ltx', 0.0)), 0, 0)
 
-    def ground_feet(self, ground=0.0, rest=0.04, tol=0.004, base=0.0):
+    def ground_feet(self, ground=0.0, rest=LEG['footY'], tol=0.004, base=0.0):
         """After pose(): an ankle under the world ground is put back ON it by re-solving that leg - the hip swing
         and the knee - with the hip where the pose left it, the ankle at the same place across the ground, and the
         foot turned back so the sole keeps its angle. pose() solves the legs in the character's own frame, so a
@@ -429,6 +486,25 @@ def parent_rigid(ob, joint):
     return ob
 
 
+def bind_foot_toe(ob, rig, foot, toe, band=0.03):
+    """A FOOT split at the ball (28 Nov): what is ahead of the toe joint rides the toe bone, the heel the foot bone,
+    blended over `band` metres across the ball so the fold never tears. A sandal was one rigid piece on the foot
+    bone, so a rising heel lifted the whole sole off the ground on its tip (engine/footlock.js: toe-off 29 deg)."""
+    gs = {b: ob.vertex_groups.new(name=b) for b in (foot, toe)}
+    M = ob.matrix_world
+    ball = Vector(reg.REST[toe])
+    for v in ob.data.vertices:
+        f = -((M @ v.co).y - ball.y)                   # metres ahead of the ball (the figure faces -Y)
+        t = min(1.0, max(0.0, f / band + 0.5))
+        t = t * t * (3.0 - 2.0 * t)
+        gs[toe].add([v.index], t, 'REPLACE')
+        gs[foot].add([v.index], 1.0 - t, 'REPLACE')
+    mod = ob.modifiers.new('skin', 'ARMATURE')
+    mod.object = rig
+    ob['pc_bind'] = f'foot:{foot},{toe}'
+    return ob
+
+
 # =========================================================================== internal faces
 def hide_internal_faces(objs, bind):
     """Delete faces sealed inside another RIGID part on the same bone: they never show and cost samples."""
@@ -533,6 +609,9 @@ def build(recipe, *, pose='standing', location=(0, 0, 0), yaw=0.0, collection=No
             ob.parent = rig.rig
         elif kind in ('skin', 'hang') and len(ob.data.vertices):
             skin_object(ob, rig.rig, bones)
+            ob.parent = rig.rig
+        elif bone in ('lfoot', 'rfoot') and len(ob.data.vertices):
+            bind_foot_toe(ob, rig.rig, bone, bone[0] + 'toe')
             ob.parent = rig.rig
         else:
             parent_rigid(ob, rig.J[bone])

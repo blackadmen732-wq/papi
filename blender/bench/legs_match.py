@@ -41,9 +41,9 @@ coll = bpy.data.collections.new('LM')
 bpy.context.scene.collection.children.link(coll)
 rig = MB.Rig(coll, 'LM')
 PAIRS = {'thigh.R': 'rthigh', 'shin.R': 'rshin', 'foot.R': 'rfoot', 'thigh.L': 'lthigh', 'shin.L': 'lshin',
-         'foot.L': 'lfoot', 'hips': 'hips', 'root': 'root'}
+         'foot.L': 'lfoot', 'hips': 'hips', 'root': 'root', 'toe.R': 'rtoe', 'toe.L': 'ltoe'}
 err = {k: [] for k in PAIRS}
-ang = {'foot.R': [], 'foot.L': []}             # the foot's pointing direction (the heel-toe roll), degrees
+ang = {'foot.R': [], 'foot.L': [], 'toe.R': [], 'toe.L': []}   # the foot's and the toes' pointing direction, degrees
 feet_seen = 0
 for f in range(fr0, fr1 + 1):
     act = T['frames'][f]['actors'].get(WHO)
@@ -57,6 +57,8 @@ for f in range(fr0, fr1 + 1):
     bpy.context.view_layer.update()
     js = M['frames'][f * per]['cast'][WHO]['joints']
     for jn, bn in PAIRS.items():
+        if jn not in names:                                 # a motion export from before the toe joint (28 Nov)
+            continue
         x, y, z = js[names.index(jn)][:3]
         want = Vector((x, -z, y))                           # three.js -> Blender
         got = rig.J[bn].matrix_world.translation
@@ -73,7 +75,7 @@ for jn, e in err.items():
     if not e:
         continue
     print('  %-8s median %6.2f  worst %6.2f' % (jn, statistics.median(e) * 100, max(e) * 100))
-    if jn.startswith('foot') and max(e) > 0.01:
+    if jn.startswith(('foot', 'toe')) and max(e) > 0.01:
         bad = True
 for jn, e in ang.items():
     if e:
