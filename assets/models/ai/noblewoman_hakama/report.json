@@ -1,0 +1,60 @@
+{
+ "id": "noblewoman_hakama",
+ "raw": "output/tripo/cast/noblewoman-model-1.pbr.glb",
+ "faces_raw": 399902,
+ "cut_inputs": [
+  "Metallic"
+ ],
+ "facing": {
+  "from": "manifest",
+  "deg": 0.0
+ },
+ "fit": {
+  "mode": "body",
+  "scale": 1.842054318281004,
+  "waist_centre_model": [
+   0.013788620708821503,
+   -0.06900017010597846
+  ],
+  "height_m": 1.8421052631578945
+ },
+ "welded_verts": 22269,
+ "open_edges_after_weld": 0,
+ "islands": {
+  "found": 13,
+  "crumb_faces_removed": 6037
+ },
+ "cut_z_model": null,
+ "faces_cut": 199999,
+ "facets_turned_to_surface": 220,
+ "faces_part": 5033,
+ "paint_samples": {
+  "ray": 18348,
+  "nearest": 1317,
+  "none": 468
+ },
+ "bake_missed_pct": 0.0,
+ "paint_source": "outermost surface ray samples",
+ "unpainted_facets": 103,
+ "despeckled_faces": 197,
+ "classes_pct": {
+  "kimono": 70.5,
+  "under": 29.5
+ },
+ "hair_faces_pct": 0.0,
+ "ink_pct": 0.0,
+ "glow_pct": 0.0,
+ "bbox": {
+  "min": [
+   -0.32046687602996826,
+   -0.15047906339168549,
+   0.02968941628932953
+  ],
+  "max": [
+   0.3133294880390167,
+   0.4739501178264618,
+   0.9302896857261658
+  ]
+ },
+ "total_s": 7.6
+}

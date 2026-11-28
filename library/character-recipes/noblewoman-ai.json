@@ -1,0 +1,44 @@
+{
+  "id": "noblewoman-ai",
+  "name": "Noblewoman - generated head and body sections (look board: Noblewoman)",
+  "extends": "ronin-reference.json",
+  "note": "The look board's Noblewoman from ONE generated figure (the `noblewoman` body block + noblewoman_head): face, black hair in a bun with red kanzashi, torso with the red obi, two long furisode sleeves (kept down to 0.66 m), the kimono and the red under-skirt as ONE skirt section to the hem (no legs to cut), white tabi under the hem. Kept from the folded library: the neck, the forearm under-sleeves and the hands. No sword. Later: the obi tails as a free paper-cloth part, the sleeves as layered plates (item 17).",
+  "drop": [
+    "face",
+    "hair",
+    "hat",
+    "torso",
+    "sleeve_upper",
+    "sleeve_hanging",
+    "thigh",
+    "shin",
+    "armor",
+    "foot",
+    "collar",
+    "obi",
+    "katana_sheathed"
+  ],
+  "add": [
+    {
+      "part": "noblewoman_head"
+    },
+    {
+      "part": "noblewoman_torso"
+    },
+    {
+      "part": "noblewoman_sleeve_L"
+    },
+    {
+      "part": "noblewoman_sleeve_R"
+    },
+    {
+      "part": "noblewoman_hakama"
+    },
+    {
+      "part": "noblewoman_foot_L"
+    },
+    {
+      "part": "noblewoman_foot_R"
+    }
+  ]
+}

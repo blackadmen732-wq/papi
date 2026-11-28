@@ -62,6 +62,14 @@ A face needs printed ink, so a head is cut from the same model in head mode (bak
 | Kojiro | `kojiro-ai2` | kojiro_head_t1 (own head model) + 8 kojiro_*_t1 | validator 174/174 (both sides, since 27 Nov pm), 5-pose sweep |
 | Musashi | `musashi-ai` | musashi_head_t1 + 8 musashi_* from one figure (35 credits) | validator 175/175, 5-pose sweep `output/heads/poses-ai-bodies.png` |
 | Armoured samurai (look board) | `samurai-ai` | 9 armored_* from one figure (35 credits): kabuto + menpo, cuirass, shoulder guards + sleeves, skirt plates, legs, feet; folded `kote_plated` forearms | validator 225/225, same sweep |
+| Ronin (look board) | `ronin-ai` | ronin_head + 8 ronin_* from one figure (body block `ronin`); ragged trouser hems kept | validator 174/174, sweep `output/cast/ronin-sweep.png` |
+| Monk (look board) | `monk-ai` | monk_head + 8 monk_*; torso takes the robe to 0.62 m, the robe below is ONE skirt (`skin: skirt`), trousers under it; no sword | validator 150/150, sweep `output/cast/monk-sweep.png` |
+| Noblewoman (look board) | `noblewoman-ai` | noblewoman_head + torso, 2 long sleeves, kimono + red under-skirt as ONE skirt (`skin: skirt`), 2 tabi tips; no legs, no sword | validator 129/129, sweep `output/cast/noblewoman-sweep.png` |
+
+A body block may list its `sections` (a subset), and override `keep`, `faces` and `bind` per section. `"bind":
+{"hakama": {"skin": "skirt"}}` weights a long robe by height and side (`modular_builder.skin_skirt`): by distance alone
+the Monk's robe tore at the back in a stride. Cast line-up: `$B -b -P blender/character/lineup.py -- --recipes a,b,c
+--out output/cast/lineup.png` (1280x720, one camera and light for the whole row).
 
 Kept from the folded library on both: neck, forearm under-sleeve (the hand floated off the cuff without it), hands
 (the sword grips swap them), sword. Known limits: a raised arm crumples the skinned sleeve; the forearm under-sleeve

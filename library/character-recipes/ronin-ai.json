@@ -1,0 +1,49 @@
+{
+  "id": "ronin-ai",
+  "name": "Ronin - generated head and body sections (look board: Ronin)",
+  "extends": "ronin-reference.json",
+  "note": "The look board's Ronin from ONE generated figure (library/ai-parts.json: the `ronin` body block + ronin_head; Tripo text_to_image 5 + image_to_model 30 credits): head with face and black hair (baked paint, printed ink), torso with the red obi, two sleeves, hakama top, two trouser legs with their ragged hems kept (the keep box cuts above the torn edge, never through it), two straw sandals with black ankle wraps. Sheets from the model's own paint. Kept from the folded library: the neck, the forearm under-sleeves, the hands and the sheathed katana, as on kojiro-ai2 and musashi-ai.",
+  "drop": [
+    "face",
+    "hair",
+    "hat",
+    "torso",
+    "sleeve_upper",
+    "sleeve_hanging",
+    "thigh",
+    "shin",
+    "armor",
+    "foot",
+    "collar",
+    "obi"
+  ],
+  "add": [
+    {
+      "part": "ronin_head"
+    },
+    {
+      "part": "ronin_torso"
+    },
+    {
+      "part": "ronin_sleeve_L"
+    },
+    {
+      "part": "ronin_sleeve_R"
+    },
+    {
+      "part": "ronin_hakama"
+    },
+    {
+      "part": "ronin_leg_L"
+    },
+    {
+      "part": "ronin_leg_R"
+    },
+    {
+      "part": "ronin_foot_L"
+    },
+    {
+      "part": "ronin_foot_R"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "id": "monk-ai",
+  "name": "Monk - generated head and body sections (look board: Monk)",
+  "extends": "ronin-reference.json",
+  "note": "The look board's Monk from ONE generated figure (the `monk` body block + monk_head): shaved head, torso with the cream kesa and the wooden beads, two sleeves, the robe below the obi as ONE skirt section down to its hem at 0.28 m (the 'hakama' section with its box lowered), the cream trousers under it (0.12-0.40 m), white tabi and straw sandals. Kept from the folded library: the neck, the hands and the forearm under-sleeve (in the robe's card_umber). No sword: a monk carries none.",
+  "drop": [
+    "face",
+    "hair",
+    "hat",
+    "torso",
+    "sleeve_upper",
+    "sleeve_hanging",
+    "thigh",
+    "shin",
+    "armor",
+    "foot",
+    "collar",
+    "obi",
+    "katana_sheathed"
+  ],
+  "swap": [
+    {
+      "part": "forearm_folded",
+      "scale": 1.0,
+      "params": {
+        "material": "card_umber"
+      }
+    }
+  ],
+  "add": [
+    {
+      "part": "monk_head"
+    },
+    {
+      "part": "monk_torso"
+    },
+    {
+      "part": "monk_sleeve_L"
+    },
+    {
+      "part": "monk_sleeve_R"
+    },
+    {
+      "part": "monk_hakama"
+    },
+    {
+      "part": "monk_leg_L"
+    },
+    {
+      "part": "monk_leg_R"
+    },
+    {
+      "part": "monk_foot_L"
+    },
+    {
+      "part": "monk_foot_R"
+    }
+  ]
+}

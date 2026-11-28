@@ -1,0 +1,57 @@
+{
+ "id": "monk_foot_L",
+ "raw": "output/tripo/cast/monk-model-1.pbr.glb",
+ "faces_raw": 367746,
+ "cut_inputs": [
+  "Metallic"
+ ],
+ "facing": {
+  "from": "manifest",
+  "deg": 0.0
+ },
+ "fit": {
+  "mode": "body",
+  "scale": 1.7948718483631443,
+  "waist_centre_model": [
+   -0.0028363868762230045,
+   0.013195143226015858
+  ],
+  "height_m": 1.7948717948717947
+ },
+ "welded_verts": 17123,
+ "open_edges_after_weld": 0,
+ "cut_z_model": null,
+ "faces_cut": 14941,
+ "facets_turned_to_surface": 8,
+ "faces_part": 912,
+ "paint_samples": {
+  "ray": 3309,
+  "nearest": 243,
+  "none": 96
+ },
+ "bake_missed_pct": 0.0,
+ "paint_source": "outermost surface ray samples",
+ "unpainted_facets": 24,
+ "despeckled_faces": 103,
+ "classes_pct": {
+  "tabi": 12.7,
+  "straw": 32.0,
+  "trousers": 55.3
+ },
+ "hair_faces_pct": 0.0,
+ "ink_pct": 0.0,
+ "glow_pct": 0.0,
+ "bbox": {
+  "min": [
+   0.07662088423967361,
+   -0.19962318241596222,
+   -0.00027962273452430964
+  ],
+  "max": [
+   0.2609471082687378,
+   0.0506979264318943,
+   0.15001162886619568
+  ]
+ },
+ "total_s": 3.1
+}

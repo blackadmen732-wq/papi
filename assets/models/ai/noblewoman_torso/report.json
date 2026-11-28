@@ -1,0 +1,56 @@
+{
+ "id": "noblewoman_torso",
+ "raw": "output/tripo/cast/noblewoman-model-1.pbr.glb",
+ "faces_raw": 399902,
+ "cut_inputs": [
+  "Metallic"
+ ],
+ "facing": {
+  "from": "manifest",
+  "deg": 0.0
+ },
+ "fit": {
+  "mode": "body",
+  "scale": 1.842054318281004,
+  "waist_centre_model": [
+   0.013788620708821503,
+   -0.06900017010597846
+  ],
+  "height_m": 1.8421052631578945
+ },
+ "welded_verts": 22269,
+ "open_edges_after_weld": 0,
+ "cut_z_model": null,
+ "faces_cut": 127754,
+ "facets_turned_to_surface": 179,
+ "faces_part": 5044,
+ "paint_samples": {
+  "ray": 17279,
+  "nearest": 2382,
+  "none": 516
+ },
+ "bake_missed_pct": 0.0,
+ "paint_source": "outermost surface ray samples",
+ "unpainted_facets": 116,
+ "despeckled_faces": 234,
+ "classes_pct": {
+  "kimono": 56.6,
+  "obi": 43.4
+ },
+ "hair_faces_pct": 0.0,
+ "ink_pct": 0.0,
+ "glow_pct": 0.0,
+ "bbox": {
+  "min": [
+   -0.21537330746650696,
+   -0.2218746840953827,
+   0.859895646572113
+  ],
+  "max": [
+   0.2151886373758316,
+   0.23126906156539917,
+   1.5003238916397095
+  ]
+ },
+ "total_s": 5.3
+}

@@ -1,0 +1,51 @@
+{
+ "id": "noblewoman_head",
+ "raw": "output/tripo/cast/noblewoman-model-1.pbr.glb",
+ "faces_raw": 399902,
+ "cut_inputs": [
+  "Metallic"
+ ],
+ "facing": {
+  "from": "manifest",
+  "deg": 0.0
+ },
+ "welded_verts": 22269,
+ "open_edges_after_weld": 0,
+ "cut_z_model": 0.3150225400924682,
+ "faces_cut": 27798,
+ "fit": {
+  "scale": 1.843192266894614,
+  "centre_model_x": 0.0014858543872833252,
+  "neck_model_y": -0.07464277744293213,
+  "neck_light_x": 0.011044102720916271,
+  "neck_samples": 1352
+ },
+ "facets_turned_to_surface": 2,
+ "faces_part": 4012,
+ "bake_s": 2.4,
+ "bake_missed_pct": 23.34,
+ "bake_black_pct": 0.17,
+ "source_black_pct": 0.06,
+ "despeckled_faces": 31,
+ "classes_pct": {
+  "skin": 10.7,
+  "hair": 80.2,
+  "band": 9.1
+ },
+ "hair_faces_pct": 80.2,
+ "ink_pct": 65.87,
+ "glow_pct": 0.0,
+ "bbox": {
+  "min": [
+   -0.18359650671482086,
+   -0.15417908132076263,
+   1.5099499225616455
+  ],
+  "max": [
+   0.18341781198978424,
+   0.18003754317760468,
+   1.8510279655456543
+  ]
+ },
+ "total_s": 7.1
+}

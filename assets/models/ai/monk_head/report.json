@@ -1,0 +1,55 @@
+{
+ "id": "monk_head",
+ "raw": "output/tripo/cast/monk-model-1.pbr.glb",
+ "faces_raw": 367746,
+ "cut_inputs": [
+  "Metallic"
+ ],
+ "facing": {
+  "from": "manifest",
+  "deg": 0.0
+ },
+ "welded_verts": 17123,
+ "open_edges_after_weld": 0,
+ "islands": {
+  "found": 3,
+  "crumb_faces_removed": 208
+ },
+ "cut_z_model": 0.34500000461936,
+ "faces_cut": 16320,
+ "fit": {
+  "scale": 1.7935484405486832,
+  "centre_model_x": 0.0027296356856822968,
+  "neck_model_y": -0.006219138391315937,
+  "neck_light_x": -0.00047347371582873166,
+  "neck_samples": 1911
+ },
+ "facets_turned_to_surface": 0,
+ "faces_part": 4022,
+ "bake_s": 2.0,
+ "bake_missed_pct": 31.3,
+ "bake_black_pct": 0.01,
+ "source_black_pct": 0.0,
+ "despeckled_faces": 30,
+ "classes_pct": {
+  "skin": 88.5,
+  "hair": 0.3,
+  "band": 11.2
+ },
+ "hair_faces_pct": 0.3,
+ "ink_pct": 1.12,
+ "glow_pct": 0.0,
+ "bbox": {
+  "min": [
+   -0.14715130627155304,
+   -0.09207187592983246,
+   1.5099931955337524
+  ],
+  "max": [
+   0.14712366461753845,
+   0.14765778183937073,
+   1.7879153490066528
+  ]
+ },
+ "total_s": 6.3
+}

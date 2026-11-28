@@ -1,0 +1,56 @@
+{
+ "id": "noblewoman_foot_L",
+ "raw": "output/tripo/cast/noblewoman-model-1.pbr.glb",
+ "faces_raw": 399902,
+ "cut_inputs": [
+  "Metallic"
+ ],
+ "facing": {
+  "from": "manifest",
+  "deg": 0.0
+ },
+ "fit": {
+  "mode": "body",
+  "scale": 1.842054318281004,
+  "waist_centre_model": [
+   0.013788620708821503,
+   -0.06900017010597846
+  ],
+  "height_m": 1.8421052631578945
+ },
+ "welded_verts": 22269,
+ "open_edges_after_weld": 0,
+ "cut_z_model": null,
+ "faces_cut": 4593,
+ "facets_turned_to_surface": 15,
+ "faces_part": 934,
+ "paint_samples": {
+  "ray": 3529,
+  "nearest": 103,
+  "none": 107
+ },
+ "bake_missed_pct": 0.0,
+ "paint_source": "outermost surface ray samples",
+ "unpainted_facets": 26,
+ "despeckled_faces": 41,
+ "classes_pct": {
+  "tabi": 42.7,
+  "under": 57.3
+ },
+ "hair_faces_pct": 0.0,
+ "ink_pct": 0.0,
+ "glow_pct": 0.0,
+ "bbox": {
+  "min": [
+   0.01979246363043785,
+   -0.0884614884853363,
+   0.00011046074359910563
+  ],
+  "max": [
+   0.16000571846961975,
+   0.10006749629974365,
+   0.10006419569253922
+  ]
+ },
+ "total_s": 3.1
+}

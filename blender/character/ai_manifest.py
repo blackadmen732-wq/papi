@@ -9,7 +9,9 @@ tools/ai_part.py prepares and part_registry registers:
 
 The boxes are in rig metres after the body fit (feet at 0, the shoulder line at 1.40 m), proven on Kojiro
 (kojiro_*_t1, 27 Nov: 152/152, bends through the 5-pose sweep). A section may only contain the classes listed for
-it in SECTIONS (or the block's own "classes": {section: [...]}), so a sleeve can never pick up hakama paint. Used by tools/ai_part.py and part_registry.load_ai_parts().
+it in SECTIONS (or the block's own "classes": {section: [...]}), so a sleeve can never pick up hakama paint.
+A block may also list its "sections" (a subset of ORDER: a kimono to the floor has no legs to cut, so the
+"hakama" section keeps the whole skirt) and override per section "keep", "faces" and "bind" (bones / layer). Used by tools/ai_part.py and part_registry.load_ai_parts().
 """
 import json
 import os
@@ -46,10 +48,15 @@ def expand_body(prefix, b):
     out = {}
     fit = b.get('fit') or {'mode': 'body', 'shoulder_frac': 0.74, 'shoulder_z': 1.40}
     colors, sheets = b['colors'], b['sheets']
+    only = b.get('sections')                           # a figure without every section (a kimono has no legs to cut)
     for sec in ORDER:
         if sec == 'head' and not b.get('head'):
             continue
+        if only is not None and sec not in only:
+            continue
         slot, socket, keep, faces, classes, bind = SECTIONS[sec]
+        faces = b.get('faces', {}).get(sec, faces)         # a long robe skirt needs more facets than a hakama top
+        bind = dict(bind, **b.get('bind', {}).get(sec, {}))  # e.g. a floor-length skirt also follows the shins
         classes = b.get('classes', {}).get(sec, classes)   # an outfit that is not a kimono (armour: red lacing on the skirt)
         keep = dict(keep, **(b.get('keep', {}).get(sec, {})))
         pal = [{'name': c, 'rgb': colors[c]} for c in classes if c in colors]
@@ -58,7 +65,7 @@ def expand_body(prefix, b):
              'prepared': f'assets/models/ai/{prefix}_{sec}', 'keep': keep, 'faces': faces, 'palette': pal,
              'sheets': {p['name']: sheets[p['name']] for p in pal}, 'rigid': bool(bind.get('rigid', False)),
              'from_body': prefix}
-        for k in ('bones', 'bone', 'layer'):
+        for k in ('bones', 'bone', 'layer', 'skin'):     # skin: 'skirt' = by height and side (a long robe)
             if k in bind:
                 e[k] = bind[k]
         for k in ('cage', 'ray', 'bake_res'):          # bake settings shared by every section of the body

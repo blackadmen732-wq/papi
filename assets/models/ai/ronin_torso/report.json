@@ -1,0 +1,61 @@
+{
+ "id": "ronin_torso",
+ "raw": "output/tripo/cast/ronin-model-1.pbr.glb",
+ "faces_raw": 432224,
+ "cut_inputs": [
+  "Metallic"
+ ],
+ "facing": {
+  "from": "manifest",
+  "deg": 0.0
+ },
+ "fit": {
+  "mode": "body",
+  "scale": 1.7500333792377325,
+  "waist_centre_model": [
+   -0.015721519856607944,
+   0.003845312147898521
+  ],
+  "height_m": 1.7499999999999998
+ },
+ "welded_verts": 34813,
+ "open_edges_after_weld": 0,
+ "islands": {
+  "found": 7,
+  "crumb_faces_removed": 557
+ },
+ "cut_z_model": null,
+ "faces_cut": 102253,
+ "facets_turned_to_surface": 161,
+ "faces_part": 5062,
+ "paint_samples": {
+  "ray": 15356,
+  "nearest": 4252,
+  "none": 640
+ },
+ "bake_missed_pct": 0.0,
+ "paint_source": "outermost surface ray samples",
+ "unpainted_facets": 147,
+ "despeckled_faces": 426,
+ "classes_pct": {
+  "robe": 67.7,
+  "torn": 3.4,
+  "obi": 28.9
+ },
+ "hair_faces_pct": 0.0,
+ "ink_pct": 0.0,
+ "glow_pct": 0.0,
+ "bbox": {
+  "min": [
+   -0.2151317596435547,
+   -0.18895113468170166,
+   0.8599247932434082
+  ],
+  "max": [
+   0.215115025639534,
+   0.10810954868793488,
+   1.5001870393753052
+  ]
+ },
+ "total_s": 5.8
+}

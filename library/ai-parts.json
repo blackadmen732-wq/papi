@@ -2082,5 +2082,881 @@
       "lT"
     ],
     "dark_below": 0.1
+  },
+  "ronin": {
+    "kind": "body",
+    "label": "Ronin (Tripo body, look board: Ronin)",
+    "raw": "output/tripo/cast/ronin-model-1.pbr.glb",
+    "facing": "+x",
+    "head": false,
+    "fit": {
+      "mode": "body",
+      "shoulder_frac": 0.8,
+      "shoulder_z": 1.4
+    },
+    "source": {
+      "service": "Tripo API",
+      "concept": "output/tripo/cast/ronin-concept-1.image.png (text_to_image, 5 credits)",
+      "model": "output/tripo/cast/ronin-model-1.pbr.glb (image_to_model v3.0-20250812, 30 credits)",
+      "date": "2026-11-27"
+    },
+    "colors": {
+      "robe": [
+        [
+          0.763,
+          0.704,
+          0.616
+        ],
+        [
+          0.755,
+          0.675,
+          0.562
+        ],
+        [
+          0.726,
+          0.627,
+          0.505
+        ],
+        [
+          0.772,
+          0.658,
+          0.488
+        ],
+        [
+          0.698,
+          0.57,
+          0.417
+        ]
+      ],
+      "torn": [
+        [
+          0.645,
+          0.49,
+          0.327
+        ],
+        [
+          0.586,
+          0.387,
+          0.227
+        ],
+        [
+          0.437,
+          0.276,
+          0.148
+        ]
+      ],
+      "obi": [
+        [
+          0.645,
+          0.05,
+          0.011
+        ]
+      ],
+      "hakama": [
+        [
+          0.763,
+          0.704,
+          0.616
+        ],
+        [
+          0.755,
+          0.675,
+          0.562
+        ],
+        [
+          0.726,
+          0.627,
+          0.505
+        ],
+        [
+          0.772,
+          0.658,
+          0.488
+        ],
+        [
+          0.698,
+          0.57,
+          0.417
+        ]
+      ],
+      "straw": [
+        [
+          0.645,
+          0.49,
+          0.327
+        ],
+        [
+          0.586,
+          0.387,
+          0.227
+        ],
+        [
+          0.437,
+          0.276,
+          0.148
+        ],
+        [
+          0.698,
+          0.57,
+          0.417
+        ]
+      ],
+      "wrap": [
+        [
+          0.157,
+          0.137,
+          0.12
+        ]
+      ]
+    },
+    "sheets": {
+      "robe": "washi_natural",
+      "torn": "washi_shade",
+      "obi": "washi_crimson",
+      "hakama": "washi_natural",
+      "straw": "washi_hat",
+      "wrap": "card_charcoal"
+    },
+    "classes": {
+      "torso": [
+        "robe",
+        "torn",
+        "obi"
+      ],
+      "sleeve_L": [
+        "robe",
+        "torn"
+      ],
+      "sleeve_R": [
+        "robe",
+        "torn"
+      ],
+      "hakama": [
+        "hakama",
+        "torn",
+        "obi"
+      ],
+      "leg_L": [
+        "hakama",
+        "torn",
+        "wrap"
+      ],
+      "leg_R": [
+        "hakama",
+        "torn",
+        "wrap"
+      ],
+      "foot_L": [
+        "straw",
+        "wrap"
+      ],
+      "foot_R": [
+        "straw",
+        "wrap"
+      ]
+    },
+    "zones": {
+      "obi": [
+        {
+          "z": [
+            0.86,
+            1.09
+          ]
+        }
+      ],
+      "wrap": [
+        {
+          "z": [
+            -0.05,
+            0.2
+          ]
+        }
+      ]
+    },
+    "colors_from": "the model's own paint (AI_PART_DUMP=1 + k-means over every section, 28 Nov): five creams (the kimono and trousers), three tans (the shadowed torn edges; the straw on the sandals), one red (the obi, 0.92-1.03 m), one near-black (the ankle wraps, under 0.15 m)",
+    "why": "the look board's Ronin: torn cream kimono and trousers with ragged hems, red obi, straw sandals with black ankle wraps (library/staging/cast-plan.json). The fit is the plan's: shoulder line 4% under the measured shoulder top (body_plan: 84%), as Kojiro's"
+  },
+  "monk": {
+    "kind": "body",
+    "label": "Monk (Tripo body, look board: Monk)",
+    "raw": "output/tripo/cast/monk-model-1.pbr.glb",
+    "facing": "+x",
+    "head": false,
+    "fit": {
+      "mode": "body",
+      "shoulder_frac": 0.78,
+      "shoulder_z": 1.4
+    },
+    "source": {
+      "service": "Tripo API",
+      "concept": "output/tripo/cast/monk-concept-1.image.png (text_to_image, 5 credits)",
+      "model": "output/tripo/cast/monk-model-1.pbr.glb (image_to_model v3.0-20250812, 30 credits)",
+      "date": "2026-11-27"
+    },
+    "colors": {
+      "robe": [
+        [
+          0.275,
+          0.215,
+          0.182
+        ],
+        [
+          0.187,
+          0.15,
+          0.12
+        ],
+        [
+          0.345,
+          0.282,
+          0.247
+        ]
+      ],
+      "kesa": [
+        [
+          0.775,
+          0.657,
+          0.47
+        ],
+        [
+          0.764,
+          0.616,
+          0.394
+        ],
+        [
+          0.64,
+          0.52,
+          0.361
+        ]
+      ],
+      "beads": [
+        [
+          0.359,
+          0.202,
+          0.096
+        ],
+        [
+          0.508,
+          0.379,
+          0.24
+        ]
+      ],
+      "trousers": [
+        [
+          0.775,
+          0.657,
+          0.47
+        ],
+        [
+          0.764,
+          0.616,
+          0.394
+        ],
+        [
+          0.64,
+          0.52,
+          0.361
+        ]
+      ],
+      "tabi": [
+        [
+          0.717,
+          0.696,
+          0.669
+        ]
+      ],
+      "straw": [
+        [
+          0.698,
+          0.5,
+          0.238
+        ],
+        [
+          0.508,
+          0.379,
+          0.24
+        ]
+      ]
+    },
+    "sheets": {
+      "robe": "card_umber",
+      "kesa": "washi_natural",
+      "beads": "card_oxblood",
+      "trousers": "washi_natural",
+      "tabi": "washi_bleached",
+      "straw": "washi_hat"
+    },
+    "classes": {
+      "torso": [
+        "robe",
+        "kesa",
+        "beads"
+      ],
+      "sleeve_L": [
+        "robe",
+        "kesa"
+      ],
+      "sleeve_R": [
+        "robe",
+        "kesa"
+      ],
+      "hakama": [
+        "robe",
+        "kesa"
+      ],
+      "leg_L": [
+        "trousers",
+        "robe"
+      ],
+      "leg_R": [
+        "trousers",
+        "robe"
+      ],
+      "foot_L": [
+        "tabi",
+        "straw",
+        "trousers"
+      ],
+      "foot_R": [
+        "tabi",
+        "straw",
+        "trousers"
+      ]
+    },
+    "zones": {
+      "beads": [
+        {
+          "z": [
+            1.05,
+            1.6
+          ],
+          "x": [
+            -0.2,
+            0.2
+          ]
+        }
+      ],
+      "kesa": [
+        {
+          "z": [
+            0.75,
+            1.6
+          ]
+        }
+      ],
+      "tabi": [
+        {
+          "z": [
+            -0.05,
+            0.2
+          ]
+        }
+      ]
+    },
+    "keep": {
+      "torso": {
+        "z": [
+          0.62,
+          1.5
+        ]
+      },
+      "hakama": {
+        "x": [
+          -0.25,
+          0.25
+        ],
+        "z": [
+          0.28,
+          0.64
+        ]
+      },
+      "leg_L": {
+        "z": [
+          0.12,
+          0.4
+        ]
+      },
+      "leg_R": {
+        "z": [
+          0.12,
+          0.4
+        ]
+      }
+    },
+    "faces": {
+      "torso": 6000,
+      "hakama": 3500
+    },
+    "colors_from": "the model's own paint (AI_PART_DUMP=1 + k-means, 28 Nov): three browns (the robe), three creams (the kesa stole and the trousers), a red-brown (the prayer beads, only on the chest), a grey-white (the tabi), an ochre (the sandal straw)",
+    "why": "the look board's Monk: dark brown robe falling below the knee, cream kesa across the chest, wooden beads, cream trousers, white tabi and sandals. The robe is ONE skirt section from the obi line to its hem at 0.28 m (the 'hakama' section with its box lowered, skinned on the hips and both thighs); the legs keep only the trousers under it (0.12-0.40 m)",
+    "keep_why": "the robe skirt is +-0.24 m wide below 0.6 m; at 0.6-0.93 m the bottoms of the hanging sleeves widen it to +-0.32 m and, cut at the box side, they stood out as flat blocks at the waist (sweeps 1-3, 28 Nov). So the torso (+-0.215 m) takes the robe down to 0.62 m and the skirt keeps 0.28-0.64 m",
+    "bind": {
+      "hakama": {
+        "skin": "skirt",
+        "bones": [
+          "hips",
+          "lthigh",
+          "rthigh"
+        ]
+      }
+    },
+    "bind_why": "a skirt to the knee or the floor is skinned by height and side (modular_builder.skin_skirt): by distance alone its back panel followed the rear thigh and tore from the front in a stride (sweep 2, 28 Nov)"
+  },
+  "noblewoman": {
+    "kind": "body",
+    "label": "Noblewoman (Tripo body, look board: Noblewoman)",
+    "raw": "output/tripo/cast/noblewoman-model-1.pbr.glb",
+    "facing": "+x",
+    "head": false,
+    "fit": {
+      "mode": "body",
+      "shoulder_frac": 0.76,
+      "shoulder_z": 1.4
+    },
+    "source": {
+      "service": "Tripo API",
+      "concept": "output/tripo/cast/noblewoman-concept-1.image.png (text_to_image, 5 credits)",
+      "model": "output/tripo/cast/noblewoman-model-1.pbr.glb (image_to_model v3.0-20250812, 30 credits)",
+      "date": "2026-11-27"
+    },
+    "sections": [
+      "torso",
+      "sleeve_L",
+      "sleeve_R",
+      "hakama",
+      "foot_L",
+      "foot_R"
+    ],
+    "colors": {
+      "kimono": [
+        [
+          0.796,
+          0.677,
+          0.472
+        ],
+        [
+          0.789,
+          0.698,
+          0.543
+        ],
+        [
+          0.777,
+          0.623,
+          0.405
+        ],
+        [
+          0.755,
+          0.561,
+          0.328
+        ],
+        [
+          0.714,
+          0.469,
+          0.237
+        ]
+      ],
+      "obi": [
+        [
+          0.669,
+          0.082,
+          0.015
+        ],
+        [
+          0.595,
+          0.064,
+          0.013
+        ],
+        [
+          0.622,
+          0.24,
+          0.151
+        ]
+      ],
+      "under": [
+        [
+          0.669,
+          0.082,
+          0.015
+        ],
+        [
+          0.595,
+          0.064,
+          0.013
+        ],
+        [
+          0.622,
+          0.24,
+          0.151
+        ]
+      ],
+      "tabi": [
+        [
+          0.702,
+          0.659,
+          0.678
+        ],
+        [
+          0.539,
+          0.405,
+          0.398
+        ]
+      ]
+    },
+    "sheets": {
+      "kimono": "washi_natural",
+      "obi": "washi_crimson",
+      "under": "washi_crimson",
+      "tabi": "washi_bleached"
+    },
+    "classes": {
+      "torso": [
+        "kimono",
+        "obi"
+      ],
+      "sleeve_L": [
+        "kimono",
+        "under"
+      ],
+      "sleeve_R": [
+        "kimono",
+        "under"
+      ],
+      "hakama": [
+        "kimono",
+        "under"
+      ],
+      "foot_L": [
+        "tabi",
+        "under"
+      ],
+      "foot_R": [
+        "tabi",
+        "under"
+      ]
+    },
+    "zones": {
+      "tabi": [
+        {
+          "z": [
+            -0.05,
+            0.16
+          ]
+        }
+      ]
+    },
+    "keep": {
+      "hakama": {
+        "z": [
+          0.03,
+          0.93
+        ]
+      },
+      "sleeve_L": {
+        "z": [
+          0.74,
+          1.55
+        ]
+      },
+      "sleeve_R": {
+        "z": [
+          0.74,
+          1.55
+        ]
+      },
+      "foot_L": {
+        "x": [
+          0.02,
+          0.16
+        ],
+        "y": [
+          -0.16,
+          0.1
+        ],
+        "z": [
+          -0.02,
+          0.1
+        ]
+      },
+      "foot_R": {
+        "x": [
+          -0.16,
+          -0.02
+        ],
+        "y": [
+          -0.16,
+          0.1
+        ],
+        "z": [
+          -0.02,
+          0.1
+        ]
+      }
+    },
+    "faces": {
+      "hakama": 5000,
+      "sleeve_L": 3000,
+      "sleeve_R": 3000
+    },
+    "colors_from": "the model's own paint (AI_PART_DUMP=1 + k-means, 28 Nov): five creams (the kimono), three reds (obi, collar and the under-skirt, all washi_crimson), the tabi",
+    "why": "the look board's Noblewoman: cream kimono with long furisode sleeves, red obi, red under-skirt, white tabi. No legs to cut (body_plan found no gap between them): the kimono and the under-skirt are ONE skirt section, the 'hakama' section with its box lowered to the hem (0.06-0.93 m); the sleeves keep their long hanging drop (to 0.66 m); the feet are only what shows under the hem",
+    "keep_why": "the hem flares to the floor and trails 0.47 m behind her: a foot box of the default size took the red hem and the train, and the rigid foot swung them out as flat red fans (sweep 1, 28 Nov). The feet are now only the tabi tips under the hem; the skirt keeps the hem down to 0.03 m; the sleeves stop at 0.74 m (to 0.66 m their centre sat 38 cm from the shoulder socket, validator limit 35) and the feet reach 0.10 m so they stay joined to the hem when the knees tuck (side silhouette, airborne-guard)",
+    "bind": {
+      "hakama": {
+        "skin": "skirt",
+        "bones": [
+          "hips",
+          "lthigh",
+          "rthigh"
+        ]
+      }
+    },
+    "bind_why": "a skirt to the knee or the floor is skinned by height and side (modular_builder.skin_skirt): by distance alone its back panel followed the rear thigh and tore from the front in a stride (sweep 2, 28 Nov)"
+  },
+  "ronin_head": {
+    "label": "Ronin: head, face and black hair (cut from the Tripo body)",
+    "slot": "face",
+    "socket": "face",
+    "bone": "head",
+    "layer": 40,
+    "raw": "output/tripo/cast/ronin-model-1.pbr.glb",
+    "facing": "+x",
+    "prepared": "assets/models/ai/ronin_head",
+    "source": {
+      "service": "Tripo API",
+      "concept": "output/tripo/cast/ronin-concept-1.image.png (text_to_image, 5 credits)",
+      "model": "output/tripo/cast/ronin-model-1.pbr.glb (image_to_model v3.0-20250812, 30 credits)",
+      "date": "2026-11-27"
+    },
+    "cut": 0.872,
+    "fit": {
+      "bottom_z": 1.51,
+      "height": 0.224,
+      "neck_xy": [
+        0.0,
+        0.0
+      ],
+      "why": "the same scale as the ronin body sections (kept piece = (1 - cut) x the figure's 1.75 m); the cut sits at the neck body_plan measured, and goes to 1.51 m, the top of the folded neck (as musashi_head_t1)"
+    },
+    "faces": 4000,
+    "dark_below": 0.3,
+    "palette": [
+      {
+        "name": "skin",
+        "rgb": [
+          [
+            0.86,
+            0.78,
+            0.64
+          ],
+          [
+            0.75,
+            0.64,
+            0.5
+          ]
+        ]
+      },
+      {
+        "name": "hair",
+        "rgb": [
+          [
+            0.1,
+            0.1,
+            0.1
+          ],
+          [
+            0.25,
+            0.23,
+            0.21
+          ]
+        ]
+      }
+    ],
+    "sheets": {
+      "skin": "washi_natural",
+      "hair": "washi_sumi"
+    },
+    "ink": [
+      0.018,
+      0.016,
+      0.015
+    ],
+    "lantern": {
+      "skin": 0.4,
+      "hair": 0.0
+    }
+  },
+  "monk_head": {
+    "label": "Monk: shaved head and face (cut from the Tripo body)",
+    "slot": "face",
+    "socket": "face",
+    "bone": "head",
+    "layer": 40,
+    "raw": "output/tripo/cast/monk-model-1.pbr.glb",
+    "facing": "+x",
+    "prepared": "assets/models/ai/monk_head",
+    "source": {
+      "service": "Tripo API",
+      "concept": "output/tripo/cast/monk-concept-1.image.png (text_to_image, 5 credits)",
+      "model": "output/tripo/cast/monk-model-1.pbr.glb (image_to_model v3.0-20250812, 30 credits)",
+      "date": "2026-11-27"
+    },
+    "cut": 0.845,
+    "fit": {
+      "bottom_z": 1.51,
+      "height": 0.278,
+      "neck_xy": [
+        0.0,
+        0.0
+      ],
+      "why": "the same scale as the monk body sections (kept piece = (1 - cut) x the figure's 1.795 m); the cut sits at the neck body_plan measured, and goes to 1.51 m, the top of the folded neck (as musashi_head_t1)"
+    },
+    "faces": 4000,
+    "dark_below": 0.3,
+    "palette": [
+      {
+        "name": "skin",
+        "rgb": [
+          [
+            0.88,
+            0.8,
+            0.62
+          ],
+          [
+            0.76,
+            0.64,
+            0.45
+          ]
+        ]
+      },
+      {
+        "name": "hair",
+        "rgb": [
+          [
+            0.1,
+            0.1,
+            0.1
+          ]
+        ]
+      },
+      {
+        "name": "band",
+        "rgb": [
+          [
+            0.9,
+            0.6,
+            0.25
+          ],
+          [
+            0.8,
+            0.5,
+            0.2
+          ]
+        ]
+      }
+    ],
+    "sheets": {
+      "skin": "washi_natural",
+      "hair": "washi_sumi",
+      "band": "washi_hat"
+    },
+    "ink": [
+      0.018,
+      0.016,
+      0.015
+    ],
+    "lantern": {
+      "skin": 0.4,
+      "hair": 0.0,
+      "band": 0.0
+    }
+  },
+  "noblewoman_head": {
+    "label": "Noblewoman: face, black hair in a bun, red kanzashi (cut from the Tripo body)",
+    "slot": "face",
+    "socket": "face",
+    "bone": "head",
+    "layer": 40,
+    "raw": "output/tripo/cast/noblewoman-model-1.pbr.glb",
+    "facing": "+x",
+    "prepared": "assets/models/ai/noblewoman_head",
+    "source": {
+      "service": "Tripo API",
+      "concept": "output/tripo/cast/noblewoman-concept-1.image.png (text_to_image, 5 credits)",
+      "model": "output/tripo/cast/noblewoman-model-1.pbr.glb (image_to_model v3.0-20250812, 30 credits)",
+      "date": "2026-11-27"
+    },
+    "cut": 0.815,
+    "fit": {
+      "bottom_z": 1.51,
+      "height": 0.341,
+      "neck_xy": [
+        0.0,
+        0.0
+      ],
+      "why": "the same scale as the noblewoman body sections (kept piece = (1 - cut) x the figure's 1.842 m); the cut sits at the neck body_plan measured, and goes to 1.51 m, the top of the folded neck (as musashi_head_t1)"
+    },
+    "faces": 4000,
+    "dark_below": 0.3,
+    "palette": [
+      {
+        "name": "skin",
+        "rgb": [
+          [
+            0.9,
+            0.86,
+            0.78
+          ],
+          [
+            0.8,
+            0.74,
+            0.66
+          ]
+        ]
+      },
+      {
+        "name": "hair",
+        "rgb": [
+          [
+            0.08,
+            0.08,
+            0.08
+          ],
+          [
+            0.22,
+            0.21,
+            0.2
+          ]
+        ]
+      },
+      {
+        "name": "band",
+        "rgb": [
+          [
+            0.8,
+            0.08,
+            0.05
+          ],
+          [
+            0.6,
+            0.06,
+            0.03
+          ]
+        ]
+      }
+    ],
+    "sheets": {
+      "skin": "washi_bleached",
+      "hair": "washi_sumi",
+      "band": "washi_crimson"
+    },
+    "ink": [
+      0.018,
+      0.016,
+      0.015
+    ],
+    "lantern": {
+      "skin": 0.4,
+      "hair": 0.0,
+      "band": 0.0
+    }
   }
 }

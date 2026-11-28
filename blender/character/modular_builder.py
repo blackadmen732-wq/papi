@@ -422,6 +422,35 @@ def skin_hang(ob, rig, sewn, hang):
     return ob
 
 
+def skin_skirt(ob, rig, bones, keep_hips=0.25, blend=0.10):
+    """Weight a LONG robe skirt (a monk's robe to the knee, a kimono to the floor) by height and side.
+
+    Inverse distance tears such a skirt in a stride: below the hips every vertex is nearest one thigh, so the
+    back panel follows the rear thigh and splits from the front (monk-ai sweep, 28 Nov). Here the waist stays on
+    the hips and the hem blends towards the thighs (smoothstep over the part's own height, the hips keep
+    `keep_hips` even at the hem), shared left/right by a smooth ramp `blend` metres either side of the middle,
+    so the cloth between the legs stretches instead of splitting. bones = [hips, lthigh, rthigh]."""
+    hips, lth, rth = bones[:3]
+    gs = {b: ob.vertex_groups.new(name=b) for b in (hips, lth, rth)}
+    M = ob.matrix_world
+    zs = [(M @ v.co).z for v in ob.data.vertices]
+    hi, lo = max(zs), min(zs)
+    span = max(hi - lo, 1e-4)
+    for v in ob.data.vertices:
+        p = M @ v.co
+        t = min(1.0, max(0.0, (hi - p.z) / span))
+        t = t * t * (3.0 - 2.0 * t) * (1.0 - keep_hips)
+        s = min(1.0, max(0.0, (p.x + blend) / (2 * blend)))   # 0 = right (-x), 1 = left (+x)
+        s = s * s * (3.0 - 2.0 * s)
+        gs[hips].add([v.index], 1.0 - t, 'REPLACE')
+        gs[lth].add([v.index], t * s, 'REPLACE')
+        gs[rth].add([v.index], t * (1.0 - s), 'REPLACE')
+    mod = ob.modifiers.new('skin', 'ARMATURE')
+    mod.object = rig
+    ob['pc_bind'] = f'skirt:{hips},{lth},{rth}'
+    return ob
+
+
 def parent_rigid(ob, joint):
     ob.parent = joint
     ob.matrix_parent_inverse = joint.matrix_world.inverted()
@@ -530,6 +559,9 @@ def build(recipe, *, pose='standing', location=(0, 0, 0), yaw=0.0, collection=No
         kind, bone, bones = bind[ob.name]
         if kind == 'hang' and len(ob.data.vertices) and len(bones) >= 2:
             skin_hang(ob, rig.rig, bones[0], bones[1])   # bones = [sewn, cloth]
+            ob.parent = rig.rig
+        elif kind == 'skirt' and len(ob.data.vertices) and len(bones) >= 3:
+            skin_skirt(ob, rig.rig, bones)                 # bones = [hips, lthigh, rthigh]
             ob.parent = rig.rig
         elif kind in ('skin', 'hang') and len(ob.data.vertices):
             skin_object(ob, rig.rig, bones)

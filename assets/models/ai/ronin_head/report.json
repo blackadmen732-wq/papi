@@ -1,0 +1,50 @@
+{
+ "id": "ronin_head",
+ "raw": "output/tripo/cast/ronin-model-1.pbr.glb",
+ "faces_raw": 432224,
+ "cut_inputs": [
+  "Metallic"
+ ],
+ "facing": {
+  "from": "manifest",
+  "deg": 0.0
+ },
+ "welded_verts": 34813,
+ "open_edges_after_weld": 0,
+ "cut_z_model": 0.3719833679199219,
+ "faces_cut": 19397,
+ "fit": {
+  "scale": 1.7500333792377334,
+  "centre_model_x": -0.006589805707335472,
+  "neck_model_y": -0.03158029541373253,
+  "neck_light_x": -0.006717138458043337,
+  "neck_samples": 1566
+ },
+ "facets_turned_to_surface": 6,
+ "faces_part": 4016,
+ "bake_s": 2.2,
+ "bake_missed_pct": 26.83,
+ "bake_black_pct": 0.02,
+ "source_black_pct": 0.02,
+ "despeckled_faces": 30,
+ "classes_pct": {
+  "skin": 14.2,
+  "hair": 85.8
+ },
+ "hair_faces_pct": 85.8,
+ "ink_pct": 57.2,
+ "glow_pct": 0.0,
+ "bbox": {
+  "min": [
+   -0.10565073788166046,
+   -0.07617487758398056,
+   1.5099879503250122
+  ],
+  "max": [
+   0.10599399358034134,
+   0.14405718445777893,
+   1.7341015338897705
+  ]
+ },
+ "total_s": 6.9
+}
