@@ -65,7 +65,7 @@ def expand_body(prefix, b):
              'prepared': f'assets/models/ai/{prefix}_{sec}', 'keep': keep, 'faces': faces, 'palette': pal,
              'sheets': {p['name']: sheets[p['name']] for p in pal}, 'rigid': bool(bind.get('rigid', False)),
              'from_body': prefix}
-        for k in ('bones', 'bone', 'layer'):
+        for k in ('bones', 'bone', 'layer', 'skin'):     # skin: 'skirt' = by height and side (a long robe)
             if k in bind:
                 e[k] = bind[k]
         for k in ('cage', 'ray', 'bake_res'):          # bake settings shared by every section of the body

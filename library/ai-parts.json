@@ -2453,6 +2453,12 @@
       ]
     },
     "keep": {
+      "torso": {
+        "z": [
+          0.62,
+          1.5
+        ]
+      },
       "hakama": {
         "x": [
           -0.25,
@@ -2460,7 +2466,7 @@
         ],
         "z": [
           0.28,
-          0.93
+          0.64
         ]
       },
       "leg_L": {
@@ -2477,11 +2483,23 @@
       }
     },
     "faces": {
-      "hakama": 4500
+      "torso": 6000,
+      "hakama": 3500
     },
     "colors_from": "the model's own paint (AI_PART_DUMP=1 + k-means, 28 Nov): three browns (the robe), three creams (the kesa stole and the trousers), a red-brown (the prayer beads, only on the chest), a grey-white (the tabi), an ochre (the sandal straw)",
     "why": "the look board's Monk: dark brown robe falling below the knee, cream kesa across the chest, wooden beads, cream trousers, white tabi and sandals. The robe is ONE skirt section from the obi line to its hem at 0.28 m (the 'hakama' section with its box lowered, skinned on the hips and both thighs); the legs keep only the trousers under it (0.12-0.40 m)",
-    "keep_why": "the robe skirt is +-0.24 m wide below 0.6 m; wider than that at 0.6-0.93 m are the bottoms of the hanging sleeves (sweep 1, 28 Nov: grey flaps bound to the hips stuck out sideways), so the skirt box stops at +-0.25 m"
+    "keep_why": "the robe skirt is +-0.24 m wide below 0.6 m; at 0.6-0.93 m the bottoms of the hanging sleeves widen it to +-0.32 m and, cut at the box side, they stood out as flat blocks at the waist (sweeps 1-3, 28 Nov). So the torso (+-0.215 m) takes the robe down to 0.62 m and the skirt keeps 0.28-0.64 m",
+    "bind": {
+      "hakama": {
+        "skin": "skirt",
+        "bones": [
+          "hips",
+          "lthigh",
+          "rthigh"
+        ]
+      }
+    },
+    "bind_why": "a skirt to the knee or the floor is skinned by height and side (modular_builder.skin_skirt): by distance alone its back panel followed the rear thigh and tore from the front in a stride (sweep 2, 28 Nov)"
   },
   "noblewoman": {
     "kind": "body",
@@ -2680,7 +2698,18 @@
     },
     "colors_from": "the model's own paint (AI_PART_DUMP=1 + k-means, 28 Nov): five creams (the kimono), three reds (obi, collar and the under-skirt, all washi_crimson), the tabi",
     "why": "the look board's Noblewoman: cream kimono with long furisode sleeves, red obi, red under-skirt, white tabi. No legs to cut (body_plan found no gap between them): the kimono and the under-skirt are ONE skirt section, the 'hakama' section with its box lowered to the hem (0.06-0.93 m); the sleeves keep their long hanging drop (to 0.66 m); the feet are only what shows under the hem",
-    "keep_why": "the hem flares to the floor and trails 0.47 m behind her: a foot box of the default size took the red hem and the train, and the rigid foot swung them out as flat red fans (sweep 1, 28 Nov). The feet are now only the tabi tips under the hem; the skirt keeps the hem down to 0.03 m"
+    "keep_why": "the hem flares to the floor and trails 0.47 m behind her: a foot box of the default size took the red hem and the train, and the rigid foot swung them out as flat red fans (sweep 1, 28 Nov). The feet are now only the tabi tips under the hem; the skirt keeps the hem down to 0.03 m",
+    "bind": {
+      "hakama": {
+        "skin": "skirt",
+        "bones": [
+          "hips",
+          "lthigh",
+          "rthigh"
+        ]
+      }
+    },
+    "bind_why": "a skirt to the knee or the floor is skinned by height and side (modular_builder.skin_skirt): by distance alone its back panel followed the rear thigh and tore from the front in a stride (sweep 2, 28 Nov)"
   },
   "ronin_head": {
     "label": "Ronin: head, face and black hair (cut from the Tripo body)",

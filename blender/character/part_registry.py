@@ -1346,7 +1346,7 @@ def _ai_part(pid, e):
          rigid=rigid, size=(1.0, 1.0), layer=e.get('layer'),
          material=next(iter(e.get('sheets', {}).values()), 'washi_natural'), tags=('ai',),
          prepared=e['prepared'], sheets=e.get('sheets', {'skin': 'washi_natural'}), ink=e.get('ink'),
-         glow=e.get('glow'), lantern=e.get('lantern'), paint_on=e.get('paint_on'))(_built)
+         glow=e.get('glow'), lantern=e.get('lantern'), paint_on=e.get('paint_on'), skin=e.get('skin'))(_built)
 
 
 def load_ai_parts(path=AI_PARTS_FILE):

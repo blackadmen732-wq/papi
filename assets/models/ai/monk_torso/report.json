@@ -21,41 +21,41 @@
  "welded_verts": 17123,
  "open_edges_after_weld": 0,
  "islands": {
-  "found": 7,
-  "crumb_faces_removed": 2233
+  "found": 4,
+  "crumb_faces_removed": 4221
  },
  "cut_z_model": null,
- "faces_cut": 115724,
- "facets_turned_to_surface": 74,
- "faces_part": 5051,
+ "faces_cut": 160297,
+ "facets_turned_to_surface": 129,
+ "faces_part": 6057,
  "paint_samples": {
-  "ray": 16556,
-  "nearest": 3109,
-  "none": 539
+  "ray": 20356,
+  "nearest": 3175,
+  "none": 698
  },
  "bake_missed_pct": 0.0,
  "paint_source": "outermost surface ray samples",
- "unpainted_facets": 126,
- "despeckled_faces": 586,
+ "unpainted_facets": 166,
+ "despeckled_faces": 440,
  "classes_pct": {
-  "robe": 40.6,
-  "kesa": 35.8,
-  "beads": 23.6
+  "robe": 52.8,
+  "kesa": 28.2,
+  "beads": 19.0
  },
  "hair_faces_pct": 0.0,
  "ink_pct": 0.0,
  "glow_pct": 0.0,
  "bbox": {
   "min": [
-   -0.215020090341568,
+   -0.21501733362674713,
    -0.19298268854618073,
-   0.8599831461906433
+   0.6194921135902405
   ],
   "max": [
-   0.2152668833732605,
+   0.21526050567626953,
    0.15323442220687866,
    1.5003130435943604
   ]
  },
- "total_s": 5.3
+ "total_s": 5.9
 }
