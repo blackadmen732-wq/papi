@@ -2652,13 +2652,13 @@
       },
       "sleeve_L": {
         "z": [
-          0.66,
+          0.74,
           1.55
         ]
       },
       "sleeve_R": {
         "z": [
-          0.66,
+          0.74,
           1.55
         ]
       },
@@ -2673,7 +2673,7 @@
         ],
         "z": [
           -0.02,
-          0.06
+          0.1
         ]
       },
       "foot_R": {
@@ -2687,7 +2687,7 @@
         ],
         "z": [
           -0.02,
-          0.06
+          0.1
         ]
       }
     },
@@ -2698,7 +2698,7 @@
     },
     "colors_from": "the model's own paint (AI_PART_DUMP=1 + k-means, 28 Nov): five creams (the kimono), three reds (obi, collar and the under-skirt, all washi_crimson), the tabi",
     "why": "the look board's Noblewoman: cream kimono with long furisode sleeves, red obi, red under-skirt, white tabi. No legs to cut (body_plan found no gap between them): the kimono and the under-skirt are ONE skirt section, the 'hakama' section with its box lowered to the hem (0.06-0.93 m); the sleeves keep their long hanging drop (to 0.66 m); the feet are only what shows under the hem",
-    "keep_why": "the hem flares to the floor and trails 0.47 m behind her: a foot box of the default size took the red hem and the train, and the rigid foot swung them out as flat red fans (sweep 1, 28 Nov). The feet are now only the tabi tips under the hem; the skirt keeps the hem down to 0.03 m",
+    "keep_why": "the hem flares to the floor and trails 0.47 m behind her: a foot box of the default size took the red hem and the train, and the rigid foot swung them out as flat red fans (sweep 1, 28 Nov). The feet are now only the tabi tips under the hem; the skirt keeps the hem down to 0.03 m; the sleeves stop at 0.74 m (to 0.66 m their centre sat 38 cm from the shoulder socket, validator limit 35) and the feet reach 0.10 m so they stay joined to the hem when the knees tuck (side silhouette, airborne-guard)",
     "bind": {
       "hakama": {
         "skin": "skirt",
