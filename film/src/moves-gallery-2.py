@@ -65,7 +65,7 @@ t = play(t, 'look-around', 0.8, dict(THREEQ, az0=20, az1=24, size=0.5, note='loo
 two_hand.append([at(t - 0.1), at(t + move_len('suriashi') + 0.3)])
 t = play(t, 'suriashi', 0.55, dict(LOW, note='suriashi'), 'three sliding steps, the soles skim the sand') + 0.6
 t = play(t, 'stumble-recover', 0.45, dict(SIDE, note='stumble'), 'the toe catches, catch steps, over-correct') + 0.55
-t = play(t, 'fall-back', 0.75, dict(LOW, note='fall'), 'slip, arms up, lands on the seat') + 0.65
+t = play(t, 'fall-back', 0.95, dict(LOW, note='fall'), 'slip, arms up, lands on the seat') + 0.65
 t = play(t, 'get-up', 1.1, None, 'rock forward, onto a knee, push up') + 0.6
 
 # ---- THE RUN: a cut to the start of a straight 13 m run along the beach; he walks off, speeds up through the walk

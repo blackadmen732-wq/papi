@@ -383,7 +383,23 @@ export function lockFeet(motion, dur, opts = {}, gait = null) {
       // a walk passes over its plant: no catch step; a RUN plants behind the middle of its contact (runPlant seconds of
       // travel): the foot lands closer under the body than it leaves it (the heel-up toe-off reaches further back)
       const lead = O.lead * (1 - wk[mid]) + (rn[mid] > 0 ? O.runPlant * rn[mid] : 0);
-      out.push({ a: i, b: j, pos: [sx / n + vel[mid][0] * lead, LEG.footY, sz / n + vel[mid][1] * lead], ry: P[mid].ry });
+      const pos = [sx / n + vel[mid][0] * lead, LEG.footY, sz / n + vel[mid][1] * lead];
+      const pv = out[out.length - 1];
+      // plantHolds: a "step" that lands where it lifted (a settle swung the nominal foot out and back) is no step: the
+      // foot stays down (28 Nov, the gallery: such a step in place left no slot for the next real step, a hop)
+      let same = false;
+      if (O.plantHolds && pv && wk[i] < 0.5 && piece[pv.b] === piece[i] && Math.hypot(pos[0] - pv.pos[0], pos[2] - pv.pos[2]) < O.holdTol
+        && Math.abs(wrap(P[mid].ry - pv.ry)) < 0.2) {
+        same = true;
+        for (let q = pv.b + 1; q < i; q++) if (air[q]) { same = false; break; }
+      }
+      if (same) {
+        // the merged plant is long now: if its end still lifts into the other foot's step, it lifts earlier instead
+        if (oSw && step && clash(j) >= 0) {
+          for (let q = j - 1; q >= pv.a + minN - 1; q--) if (clash(q) < 0) { j = q; swingFit = 0; break; }
+        }
+        pv.b = j;
+      } else out.push({ a: i, b: j, pos, ry: P[mid].ry });
       let ni = j + 1 + (swingFit > 0 ? swingFit : swingAt(j));   // the swing, unless a cut comes first: then plant at once
       for (let q = j + 1; q < Math.min(ni, N); q++) if (piece[q] !== piece[j]) { ni = q; break; }
       i = ni;
