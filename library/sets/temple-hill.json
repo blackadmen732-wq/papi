@@ -1,0 +1,63 @@
+{
+  "name": "temple-hill",
+  "about": "Mark, 28 Nov: 'create building'. A hill shrine among pines: a mound rising 6 m out of a misty valley, a long stone stair up its front under a red torii, and on the flat terrace a whole Shinto shrine (torii, a stone path between pairs of stone lanterns, a purification basin, the main hall with its long curved cypress-bark roof) beside a five-storey pagoda. Every piece from the kit (pagoda, shrine, hill: blender/sets/kit_temple.py), worn as paper craft. Morning sun from the south-east; the duel line runs along the path (Y).",
+  "seed": 11,
+  "clear": 1.6,
+  "polyhaven": true,
+  "paper": {
+    "look": "craft",
+    "width": 0.025,
+    "angle": 35,
+    "colors": {"earth": [0.19, 0.26, 0.1], "forest_floor": [0.26, 0.24, 0.17]}
+  },
+  "lighting": {
+    "preset": "day",
+    "sun": {"elev": 16.0, "az": 140, "color": [1.0, 0.8, 0.6], "energy": 3.6, "angle": 1.0},
+    "sky": {"type": "nishita", "strength": 0.8, "dust": 2.0, "air": 1.1},
+    "exposure": -1.9,
+    "bloom": 0.35,
+    "vignette": 0.3,
+    "look": "AgX - Medium High Contrast",
+    "pieces": [
+      {"kit": "fog", "name": "valley_mist", "pos": [0, 0, -0.5], "params": {"size": [300, 300, 12], "density": 0.03, "color": [0.95, 0.92, 0.88], "anisotropy": 0.5, "height": 2.6, "noise": 0.6, "noise_scale": 0.04}}
+    ],
+    "fighter": {"key": {"offset": [-1.6, 2.6, 2.6], "energy": 90, "color": [1.0, 0.82, 0.66], "size": 1.6}, "rim": {"offset": [0.4, -2.8, 2.6], "energy": 180, "color": [1.0, 0.78, 0.55], "size": 0.8}}
+  },
+  "pieces": [
+    {"kit": "ground", "name": "valley_floor", "pos": [0, 0, 0], "params": {"width": 260, "depth": 260, "key": "forest_floor", "res": 64, "bumps": 0.35, "bump_scale": 0.05, "z": -0.05}},
+    {"kit": "hill", "name": "shrine_hill", "pos": [0, 0, 0], "params": {"top": 19.0, "base": 40.0, "height": 6.0, "key": "earth", "cut_width": 4.8}},
+    {"kit": "stairs", "name": "hill_stair", "pos": [0, -40, 0], "params": {"width": 4.0, "steps": 30, "rise": 0.2, "run": 0.7}},
+    {"kit": "torii", "name": "foot_torii", "pos": [0, -42.5, 0], "params": {"height": 5.6, "span": 4.6}},
+    {"kit": "toro", "name": "foot_toro_l", "pos": [-3.4, -41.5, 0], "params": {"height": 2.0}},
+    {"kit": "toro", "name": "foot_toro_r", "pos": [3.4, -41.5, 0], "params": {"height": 2.0}},
+    {"kit": "shrine", "name": "shrine", "pos": [0, -13, 6], "params": {"path": 13.0, "lanterns": 3}},
+    {"kit": "pagoda", "name": "pagoda", "pos": [-10.5, 4.5, 6]},
+    {"kit": "pine", "name": "pine_t1", "pos": [12.5, -11, 6], "params": {"height": 7.5, "spread": 4.6, "lean": 16, "lean_dir": -30}},
+    {"kit": "pine", "name": "pine_t2", "pos": [15.5, 3, 6], "params": {"height": 8.5, "spread": 5.0, "lean": 12, "lean_dir": 10}},
+    {"kit": "pine", "name": "pine_t3", "pos": [10, 13.5, 6], "params": {"height": 7.0, "spread": 4.4, "lean": 18, "lean_dir": 60}},
+    {"kit": "pine", "name": "pine_t4", "pos": [-5.5, 15.5, 6], "params": {"height": 9.0, "spread": 4.8, "lean": 10, "lean_dir": 120}},
+    {"kit": "pine", "name": "pine_t5", "pos": [-17, -6, 6], "params": {"height": 8.0, "spread": 5.0, "lean": 22, "lean_dir": 200}},
+    {"kit": "pine", "name": "pine_t6", "pos": [-15, 12, 6], "params": {"height": 9.5, "spread": 4.6, "lean": 14, "lean_dir": 150}},
+    {"kit": "pine", "name": "pine_t7", "pos": [-6, -15, 6], "params": {"height": 6.0, "spread": 4.0, "lean": 26, "lean_dir": 250}},
+    {"kit": "pine", "name": "pine_g1", "pos": [16, -42, 0], "params": {"height": 9.0, "spread": 5.2, "lean": 14, "lean_dir": -60}},
+    {"kit": "pine", "name": "pine_g2", "pos": [-14, -45, 0], "params": {"height": 8.0, "spread": 5.0, "lean": 20, "lean_dir": 230}},
+    {"kit": "pine", "name": "pine_g3", "pos": [34, -26, 0], "params": {"height": 10.0, "spread": 5.5, "lean": 10, "lean_dir": 0}},
+    {"kit": "pine", "name": "pine_g4", "pos": [-36, -22, 0], "params": {"height": 9.5, "spread": 5.0, "lean": 12, "lean_dir": 180}},
+    {"kit": "rocks", "name": "hill_rocks", "pos": [9, -30, 1.2], "params": {"count": 6, "radius": 6.0, "size": [0.6, 1.6]}},
+    {"kit": "treeline", "name": "trees_north", "pos": [0, 62, 0], "params": {"width": 220, "depth": 22, "count": 110, "height": [10, 20]}},
+    {"kit": "treeline", "name": "trees_west", "pos": [-70, 0, 0], "rot": -90, "params": {"width": 200, "depth": 22, "count": 90, "height": [10, 18]}},
+    {"kit": "treeline", "name": "trees_east", "pos": [70, 0, 0], "rot": 90, "params": {"width": 200, "depth": 22, "count": 90, "height": [10, 18]}}
+  ],
+  "marks": {
+    "MARK_center": {"pos": [0, -7.5, 6], "face": [1, -7.5], "note": "on the shrine path between the torii and the hall, flat terrace at z 6"},
+    "MARK_hero": {"pos": [0, -10, 6], "face": [0, -5]},
+    "MARK_foe": {"pos": [0, -5, 6], "face": [0, -10]}
+  },
+  "cameras": {
+    "CAM_approach": {"pos": [2.6, -51, 1.6], "look": [-1.0, -12, 10.5], "lens": 28, "note": "from the valley at the foot of the stair: the torii, the stair climbing the hill, the pagoda and the hall above in the pines"},
+    "CAM_terrace": {"pos": [0.0, -21.5, 7.9], "look": [-0.6, 2, 8.6], "lens": 30, "note": "from the top of the stair through the shrine torii: the lantern path to the hall, the pagoda to the left"},
+    "CAM_wide": {"pos": [24, -29, 14], "look": [-5, 1, 10.5], "lens": 28, "note": "high from the south-east: the whole hill rising from the mist, shrine and pagoda among pines"}
+  },
+  "preview_cams": ["CAM_approach", "CAM_terrace", "CAM_wide"],
+  "render": {"samples": 16, "res": "540x960"}
+}

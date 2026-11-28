@@ -2036,6 +2036,8 @@ def ganryujima(ctx, P, rnd):
 # register into this same KIT (as `kit`, also when this file runs as a script)
 sys.modules.setdefault('kit', sys.modules[__name__])
 import kit_village  # noqa: E402,F401
+# pagoda, shrine_hall, shrine, hill: blender/sets/kit_temple.py (same registration)
+import kit_temple  # noqa: E402,F401
 
 # =========================================================================== CLI: list the kit
 if __name__ == '__main__':

@@ -47,25 +47,40 @@ python3 blender/sets/kit.py            # list every kit piece and its parameters
 | `bamboo-forest` | Morning mist, backlit canopy, shafts | forest floor, earth path, bamboo grove (520 culms, keeps the path clear), mossy toro, rocks, mist, motes | Duel line on Y (along the path) |
 | `ganryujima-beach` | Dawn over the strait | the `ganryujima` piece (port of `blender/world/build_world.py`) | Same marks and anchors as the v1 world; realistic sand, rocks, bark |
 | `edo-village` | Moonlit night street (the look board's night duel): blue sky, the moon over the plaza, warm lanterns, lit shoji | gravel road on earth, 6 machiya + 3 minka (thatch), well under a pine, 2 stalls, bamboo fences, 6 nobori, 5 toro, 3 cherry trees, 2 treelines, petals, ground fog, 15 Poly Haven prop groups (barrels, buckets, baskets, crates, bench, stools, pots, stump + axe, broom, mossy rocks, grass, ferns) | Duel line on X along the road; CAM_medium looks +Y at the minka and the moon. Nothing south of the road between x -3..4 (the medium shot's cone). `library/sets/village-pieces.json` = every village piece in a row, daylight |
-| `palace-island` (dev, `library/sets/dev/palace-island.json`) | Dawn over the sea: a sea castle | the `ganryujima` piece with its own island off (sea, mountains, clouds, paper sun) + an `ishigaki_base` citadel 44 x 36 m rising 9 m out of the water, a 5-storey `tenshu`, 2 corner turrets, `yaguramon` sea gate, `plaster_wall`s, pines, 2 `toro`, a pine islet (`rocks`) with a red `bridge` to a stone landing | Mark, 28 Nov. Built in 7 min, no new code. With the kit's procedural stone/plaster it reads as a realistic castle; `blender/sets/palace/paperize_set.py --craft` makes it a paper model (below). Moves to `library/sets/` after the Episode 1 render (the render stamp covers `library/sets/*.json`) |
+| `palace-island` | Dawn over the sea: a sea castle, PAPER CRAFT (`"paper"`), mist on the water | the `ganryujima` piece with its own island off (sea, mountains, clouds, paper sun) + an `ishigaki_base` citadel 44 x 36 m rising 9 m out of the water, a 5-storey `tenshu`, 2 corner turrets, `yaguramon` sea gate, `plaster_wall`s, pines, 2 `toro`, a pine islet (`rocks`) with a red `bridge` to a stone landing; `sea_mist` (420 m box, thinning upward over 2.2 m) + `channel_mist` between the islet and the citadel | Mark, 28 Nov. Marks on the courtyard (z 7.5, flat: `check_marks.py`), duel line on X between the sea gate and the keep; `CAM_courtyard` looks at it. Anchors `CAM_sea`, `CAM_front`, `CAM_aerial`, `CAM_texture` |
+| `temple-hill` | Morning: a hill shrine among pines, rising out of valley mist, PAPER CRAFT | `ground`, a `hill` (terrace r 19 m at 6 m, a cut for the stair), `stairs` (30 steps) under a foot `torii` with 2 `toro`, the `shrine` piece on the terrace (torii, lantern path, basin, `shrine_hall`), a `pagoda`, 11 pines, rocks, 3 `treeline`s, `valley_mist` | Mark, 28 Nov ("create building"). Duel line on Y along the shrine path (marks at z 6, flat). Anchors `CAM_approach`, `CAM_terrace`, `CAM_wide` |
 | `castle-skyline-2d5` | Dusk, paper-cut layers in haze | small 3D foreground (gravel, path, 2 toro, rocks, pine) + `layers` (trees, castle skyline with lit windows, trees, hills, mountains, clouds) | The 2.5D method of the reference videos: cards at real depths, so camera moves get parallax |
 
-### Paper-craft sets (`blender/sets/palace/paperize_set.py`)
+### Paper craft: `"paper": "craft"` (`blender/sets/paper_craft.py`)
 The kit's materials are procedural stone, plaster, tile and wood: a set reads as a realistic 3D place, which is right
-for some films and wrong for a paper world. The paperize pass runs on a BUILT set (.blend) and renders its anchors:
-```bash
-nice -n 15 $B -b -t 2 -P blender/sets/palace/paperize_set.py -- --blend output/sets/dev/palace-island-paper.blend \
-    --out output/sets/dev/palace-island-craft --cams CAM_sea,CAM_front,CAM_aerial,CAM_texture --craft --width 0.03 --angle 35
+for some films and wrong for a paper world. A set whose JSON says `"paper": "craft"` is built as a PAPER MODEL of
+itself: `build_set.py` runs `paper_craft.apply()` after the pieces, so the saved .blend, its stills and every film
+staged in it (`tools/film.sh --set`) wear it. `--paper craft|none` forces it on or off for one build.
+```json
+"paper": "craft"
+"paper": {"look": "craft", "width": 0.03, "angle": 35, "colors": {"earth": [0.19, 0.26, 0.10]}}
 ```
-- every building mesh gets fold lines (`add_fold_lines`, folds sharper than `--angle`) and the characters' paper
-  surface (ink in the valleys, a light edge on the ridges, a mottle), with the ink line `--width` metres wide: 3-6 cm at
+- every `SET_*` material becomes a paper SHEET of its colour (washi plaster, dark card roofs, kraft stones,
+  near-black backfill between them, brown card wood, red card lacquer, green card pine, bark-brown cypress roofs,
+  green copper...), each facet its own tone (`facet_rand`); glows (windows, lanterns, shoji) stay. The stone gaps
+  must stay near-black: in tan paper too the wall pattern vanished. `colors` recolours a sheet for one set (same
+  substring rule as the table `SHEETS` in `paper_craft.py`; the temple hill's earth is moss-green card)
+- every set mesh gets fold lines (`add_fold_lines`, folds sharper than `angle`) and the characters' paper surface
+  (ink in the valleys, a light edge on the ridges, a mottle), the ink line `width` metres wide: 2-6 cm at
   architecture distance (a character's 3.5 mm line is sub-pixel on a keep 50 m away)
-- `--craft`: every `SET_*` material becomes a paper SHEET of its colour (washi plaster, dark card roofs, kraft stones,
-  near-black backfill between them, brown card wood, red card lacquer, green card pine), each facet its own tone
-  (`facet_rand`); glows (windows, lanterns) stay. The stone gaps must stay near-black: in tan paper too the wall
-  pattern vanished
-- the sea, sky, paper sun, mountains and clouds are untouched (their look is already paper)
-Measured on the palace: 34 meshes, ~214k folds, 18 of 19 materials, ~2 min a still at 540x960.
+- untouched: the sea, sky, paper sun, mountains and clouds, 2.5D cards, fog, rain, particles (their look is their
+  own), and anything outside the SET collection (characters keep their own paper)
+- `blender/sets/palace/paperize_set.py --blend <built.blend> --craft` runs the same pass on an already built set
+  (without `--craft`: fold lines only)
+Measured: palace 37 meshes, ~233k folds, 8.7 s; temple hill 47 meshes, ~121k folds, 4.2 s.
+
+### Are the marks flat? (`blender/sets/check_marks.py`)
+```bash
+$B -b output/sets/palace-island.blend -P blender/sets/check_marks.py -- --radius 3 --step 0.5 --tol 0.05
+```
+Casts rays down on a grid round every `MARK_*` (the rule of `production_bake.py` ground_sampler: the highest
+up-facing hit on any visible mesh but the sea, sky, characters, fog) and prints the height span, the steepest step
+and holes; exit 1 when a patch spans more than `tol` m or has a hole.
 
 ## 3. Write a new set (the JSON)
 
@@ -148,6 +163,10 @@ Poly Haven photo layer on top (§5b).
 | `light` | Practical/shaping light: POINT, SPOT (beam in fog), AREA, SUN | type, energy, color, size, look, spot |
 | `moon` | Cut-paper moon disc + halo, camera-only | elev, az, size, strength |
 | `ganryujima` | The whole v1 island world as one piece | sea, island, rocks, pines, mountains, clouds, paper_sun, realistic |
+| `pagoda` | Five-storey pagoda: stone platform, red posts and plaster bays, bracket rings under deep eaves, balconies, tiled pent roofs, bronze spire with nine rings | base_w, storeys, storey_h, taper, overhang, pitch, platform, spire |
+| `shrine_hall` | Shinto main hall (nagare-zukuri): round red posts, raised floor, veranda and rail, lattice doors, thick curved cypress-bark roof running long over the front steps, chigi, katsuogi, rope with paper streamers | width, depth, floor_h, wall_h, front_ext, pitch, roof, chigi, katsuogi |
+| `shrine` | A whole shrine in one piece: torii, stone path, `lanterns` pairs of toro, purification basin, the hall at the end | path, path_w, lanterns, torii_h, hall {}, torii {}, toro {} |
+| `hill` | A mound with a flat terrace (marks stay level), smooth slopes, an optional straight cut down the front for `stairs` | top, base, height, key, cut_width |
 
 ### Materials (keys; recipes in `blender/world/paper_materials.py`, section SET MATERIALS)
 
@@ -186,6 +205,10 @@ noren, tiled pent roof, clay-slat windows, tiled gable roof, a paper lantern tha
 (library/polyhaven.json "models") reduced to flat facets with its own photo textures, `count` copies scattered off
 the fight marks. New material keys: `thatch` (Poly Haven `thatch_roof_angled` photo layer), `thatch_dark`,
 `thatch_edge`, `noren_indigo`, `banner_white`.
+
+**Temple pieces** (`blender/sets/kit_temple.py`, registered the same way): `pagoda`, `shrine_hall`, `shrine`,
+`hill` (table above). New material keys: `cypress` (bark-shingle roofs), `cypress_edge`, `copper` (green ridge),
+`rope`, `shide` (paper streamers).
 
 **Piece names are unique per set** (set pieces + `lighting.pieces`): `build_set.py` refuses a repeat, because a
 second piece of the same name replaces the first one's material (27 Nov: a castle lighting block copied into the

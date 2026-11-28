@@ -17,6 +17,7 @@ Options:
   --seed N               override the set seed                       --exposure EV  override the grade
   --frame N              frame to render (particles and rain move)   --no-fog     skip fog pieces (fast look check)
   --no-post              skip the compositor (bloom, vignette)
+  --paper craft|none     force the paper-craft look on / off (default: the set's "paper"; blender/sets/paper_craft.py)
   --polyhaven / --no-polyhaven   force the Poly Haven layer (CC0 photo textures + HDRI ambient) on / off for this
                          build, whatever the set's "polyhaven" says (before/after comparisons)
 
@@ -40,6 +41,7 @@ REPO = os.path.abspath(os.path.join(HERE, '..', '..'))
 for p in (HERE, os.path.join(HERE, '..', 'world'), os.path.join(HERE, '..', 'character')):
     sys.path.insert(0, os.path.abspath(p))
 import kit  # noqa: E402
+import paper_craft  # noqa: E402
 import paper_materials as pm  # noqa: E402
 
 ARGV = sys.argv[sys.argv.index('--') + 1:] if '--' in sys.argv else []
@@ -569,12 +571,22 @@ def main():
         if flag('no-fog') and spec['kit'] in ('fog',):
             continue
         tp = time.time()
+        _before = set(bpy.data.objects)
         kit.build_piece(ctx, spec)
+        for _ob in set(bpy.data.objects) - _before:     # which kit made it (the paper craft pass skips fog, cards...)
+            _ob['pc_kit'] = spec['kit']
         counts[spec.get('name', spec['kit'])] = round(time.time() - tp, 2)
     if S.get('snap_marks', True):
         snap_marks(scene, marks, S.get('snap_reach', 2.5))
     for i, L in enumerate(Lg.get('lights', [])):
         kit.build_piece(ctx, {'kit': 'light', 'name': L.get('name', f'light_{i}'), 'pos': L['pos'], 'params': {k: v for k, v in L.items() if k not in ('pos', 'name')}})
+    paper = S.get('paper')                              # "craft": the set becomes a paper model of itself
+    if arg('paper'):
+        paper = None if arg('paper') in ('none', 'off') else (paper if isinstance(paper, dict) else arg('paper'))
+    if paper_craft.config(paper):
+        tp = time.time()
+        paper_craft.apply(scene, paper)
+        print(f'  paper craft pass: {time.time() - tp:.1f}s')
     cam, anchors = make_cameras(scene, colls['CAMERAS'], S.get('cameras', {}), marks)
     fighter = merge(FIGHTER, Lg.get('fighter', {}))
     chars = arg('with-character')
