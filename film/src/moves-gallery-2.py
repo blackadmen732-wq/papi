@@ -55,9 +55,9 @@ t = 0.8
 t = play(t, 'back-step', 0.45, dict(SIDE, note='back-step'), 'weight forward first, then 0.45 m back') + 0.6
 t = play(t, 'sidestep-left', 0.45, dict(THREEQ, note='sidesteps'), 'lean away, slip 0.5 m left') + 0.5
 t = play(t, 'sidestep-right', 0.45, None, 'and back') + 0.6
-t = play(t, 'kneel-seiza', 1.0, dict(SIDE, note='seiza'), 'left foot back, left knee down, then sits on his heels') + 0.5
+t = play(t, 'kneel-seiza', 1.75, dict(SIDE, note='seiza'), 'left foot back, left knee down, then sits on his heels') + 0.5
 t = play(t, 'bow-seiza', 1.3, None, 'za-rei: the hands slide to the floor') + 0.5
-t = play(t, 'rise-from-seiza', 0.85, None, 'up through a kneel') + 0.55
+t = play(t, 'rise-from-seiza', 0.95, None, 'up through a kneel') + 0.55
 t = play(t, 'bow-standing', 1.2, dict(THREEQ, az0=60, az1=66, note='standing bow'), 'rei, 30 degrees') + 0.5
 t = play(t, 'sit-down', 1.7, dict(LOW, note='sit'), 'seat behind the feet, knees up') + 0.7
 t = play(t, 'stand-from-sit', 0.95, None, 'rock forward, squat, stand') + 0.55
@@ -66,7 +66,7 @@ two_hand.append([at(t - 0.1), at(t + move_len('suriashi') + 0.3)])
 t = play(t, 'suriashi', 0.55, dict(LOW, note='suriashi'), 'three sliding steps, the soles skim the sand') + 0.6
 t = play(t, 'stumble-recover', 0.45, dict(SIDE, note='stumble'), 'the toe catches, catch steps, over-correct') + 0.55
 t = play(t, 'fall-back', 0.75, dict(LOW, note='fall'), 'slip, arms up, lands on the seat') + 0.65
-t = play(t, 'get-up', 1.0, None, 'rock forward, onto a knee, push up') + 0.6
+t = play(t, 'get-up', 1.1, None, 'rock forward, onto a knee, push up') + 0.6
 
 # ---- THE RUN: a cut to the start of a straight 13 m run along the beach; he walks off, speeds up through the walk
 # into the run (the gait changes band at about 2.2 m/s), runs at 3.6 m/s, slows to a stop

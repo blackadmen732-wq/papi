@@ -1053,6 +1053,12 @@
    "fwd": -0.145
   },
   {
+   "dt": 1.05,
+   "pose": "kneel-one",
+   "fwd": -0.145,
+   "hx": 0.1
+  },
+  {
    "dt": 1.45,
    "pose": "seiza",
    "fwd": -0.29,
@@ -1093,14 +1099,20 @@
    "fwd": 0.145
   },
   {
-   "dt": 1.45,
+   "dt": 1.05,
+   "pose": "kneel-push",
+   "fwd": 0.145,
+   "tx": 0.46
+  },
+  {
+   "dt": 1.65,
    "pose": "stand-easy",
    "fwd": 0.29,
    "tx": 0.06,
    "ease": "out"
   },
   {
-   "dt": 1.95,
+   "dt": 2.15,
    "pose": "stand-easy",
    "fwd": 0.29,
    "settle": 0.5
@@ -1355,7 +1367,13 @@
    "fwd": 0.325
   },
   {
-   "dt": 1.6,
+   "dt": 1.2,
+   "pose": "kneel-push",
+   "fwd": 0.325,
+   "tx": 0.46
+  },
+  {
+   "dt": 1.8,
    "pose": "stand-easy",
    "fwd": 0.47,
    "crouch": 0.12,
@@ -1363,7 +1381,7 @@
    "ease": "out"
   },
   {
-   "dt": 2.0,
+   "dt": 2.2,
    "pose": "stand-easy",
    "fwd": 0.47,
    "settle": 0.5

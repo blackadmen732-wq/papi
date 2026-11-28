@@ -5,7 +5,7 @@
  "width": 1080,
  "height": 1920,
  "format": "vertical",
- "duration": 44.4,
+ "duration": 44.8,
  "mode": "dawn",
  "motion": {
   "overlap": true,
@@ -72,43 +72,43 @@
      "move": "rise-from-seiza"
     },
     {
-     "t": 14.2,
+     "t": 14.4,
      "move": "bow-standing"
     },
     {
-     "t": 17.4,
+     "t": 17.6,
      "move": "sit-down"
     },
     {
-     "t": 20.1,
+     "t": 20.3,
      "move": "stand-from-sit"
     },
     {
-     "t": 22.7,
+     "t": 22.9,
      "move": "look-around"
     },
     {
-     "t": 26.8,
+     "t": 27.0,
      "move": "suriashi"
     },
     {
-     "t": 29.7,
+     "t": 29.9,
      "move": "stumble-recover"
     },
     {
-     "t": 31.9,
+     "t": 32.1,
      "move": "fall-back"
     },
     {
-     "t": 33.9,
+     "t": 34.1,
      "move": "get-up"
     },
     {
-     "t": 37.05,
+     "t": 37.45,
      "pose": "stand-easy"
     },
     {
-     "t": 37.1,
+     "t": 37.5,
      "pose": "stand-easy",
      "x": -6.6,
      "z": 0.0,
@@ -116,208 +116,208 @@
      "cut": true
     },
     {
-     "t": 37.6,
+     "t": 38.0,
      "pose": "stand-easy"
     },
     {
-     "t": 37.804,
+     "t": 38.204,
      "pose": "stand-easy",
      "x": -6.592,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 38.007,
+     "t": 38.407,
      "pose": "stand-easy",
      "x": -6.54,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 38.211,
+     "t": 38.611,
      "pose": "stand-easy",
      "x": -6.403,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 38.415,
+     "t": 38.815,
      "pose": "stand-easy",
      "x": -6.153,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 38.619,
+     "t": 39.019,
      "pose": "stand-easy",
      "x": -5.776,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 38.822,
+     "t": 39.222,
      "pose": "stand-easy",
      "x": -5.272,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 39.026,
+     "t": 39.426,
      "pose": "stand-easy",
      "x": -4.66,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 39.23,
+     "t": 39.63,
      "pose": "stand-easy",
      "x": -3.969,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 39.433,
+     "t": 39.833,
      "pose": "stand-easy",
      "x": -3.24,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 39.637,
+     "t": 40.037,
      "pose": "stand-easy",
      "x": -2.507,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 39.841,
+     "t": 40.241,
      "pose": "stand-easy",
      "x": -1.773,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 40.044,
+     "t": 40.444,
      "pose": "stand-easy",
      "x": -1.04,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 40.248,
+     "t": 40.648,
      "pose": "stand-easy",
      "x": -0.307,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 40.452,
+     "t": 40.852,
      "pose": "stand-easy",
      "x": 0.427,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 40.656,
+     "t": 41.056,
      "pose": "stand-easy",
      "x": 1.16,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 40.859,
+     "t": 41.259,
      "pose": "stand-easy",
      "x": 1.893,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 41.063,
+     "t": 41.463,
      "pose": "stand-easy",
      "x": 2.627,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 41.267,
+     "t": 41.667,
      "pose": "stand-easy",
      "x": 3.36,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 41.47,
+     "t": 41.87,
      "pose": "stand-easy",
      "x": 4.093,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 41.674,
+     "t": 42.074,
      "pose": "stand-easy",
      "x": 4.826,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 41.878,
+     "t": 42.278,
      "pose": "stand-easy",
      "x": 5.532,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 42.081,
+     "t": 42.481,
      "pose": "stand-easy",
      "x": 6.154,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 42.285,
+     "t": 42.685,
      "pose": "stand-easy",
      "x": 6.645,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 42.489,
+     "t": 42.889,
      "pose": "stand-easy",
      "x": 6.983,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 42.693,
+     "t": 43.093,
      "pose": "stand-easy",
      "x": 7.174,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 42.896,
+     "t": 43.296,
      "pose": "stand-easy",
      "x": 7.249,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 43.1,
+     "t": 43.5,
      "pose": "stand-easy",
      "x": 7.26,
      "z": 0.0,
      "ry": 1.5708
     },
     {
-     "t": 43.6,
+     "t": 44.0,
      "pose": "stand-easy",
      "settle": 0.5
     }
    ],
    "twoHand": [
     [
-     26.7,
-     29.4
+     26.9,
+     29.6
     ]
    ],
    "gait": {
@@ -366,7 +366,7 @@
    "move": "kneel-seiza",
    "t": 5.5,
    "end": 7.8,
-   "still": 6.5,
+   "still": 7.25,
    "note": "left foot back, left knee down, then sits on his heels"
   },
   {
@@ -379,71 +379,71 @@
   {
    "move": "rise-from-seiza",
    "t": 11.7,
-   "end": 13.65,
-   "still": 12.55,
+   "end": 13.85,
+   "still": 12.65,
    "note": "up through a kneel"
   },
   {
    "move": "bow-standing",
-   "t": 14.2,
-   "end": 16.9,
-   "still": 15.4,
+   "t": 14.4,
+   "end": 17.1,
+   "still": 15.6,
    "note": "rei, 30 degrees"
   },
   {
    "move": "sit-down",
-   "t": 17.4,
-   "end": 19.4,
-   "still": 19.1,
+   "t": 17.6,
+   "end": 19.6,
+   "still": 19.3,
    "note": "seat behind the feet, knees up"
   },
   {
    "move": "stand-from-sit",
-   "t": 20.1,
-   "end": 22.15,
-   "still": 21.05,
+   "t": 20.3,
+   "end": 22.35,
+   "still": 21.25,
    "note": "rock forward, squat, stand"
   },
   {
    "move": "look-around",
-   "t": 22.7,
-   "end": 26.3,
-   "still": 23.5,
+   "t": 22.9,
+   "end": 26.5,
+   "still": 23.7,
    "note": "head leads, chest follows"
   },
   {
    "move": "suriashi",
-   "t": 26.8,
-   "end": 29.1,
-   "still": 27.35,
+   "t": 27.0,
+   "end": 29.3,
+   "still": 27.55,
    "note": "three sliding steps, the soles skim the sand"
   },
   {
    "move": "stumble-recover",
-   "t": 29.7,
-   "end": 31.35,
-   "still": 30.15,
+   "t": 29.9,
+   "end": 31.55,
+   "still": 30.35,
    "note": "the toe catches, catch steps, over-correct"
   },
   {
    "move": "fall-back",
-   "t": 31.9,
-   "end": 33.25,
-   "still": 32.65,
+   "t": 32.1,
+   "end": 33.45,
+   "still": 32.85,
    "note": "slip, arms up, lands on the seat"
   },
   {
    "move": "get-up",
-   "t": 33.9,
-   "end": 35.9,
-   "still": 34.9,
+   "t": 34.1,
+   "end": 36.3,
+   "still": 35.2,
    "note": "rock forward, onto a knee, push up"
   },
   {
    "move": "run",
-   "t": 37.6,
-   "end": 43.1,
-   "still": 40.5,
+   "t": 38.0,
+   "end": 43.5,
+   "still": 40.9,
    "note": "walk -> run at 3.6 m/s over 13.9 m -> stop"
   }
  ],
@@ -578,7 +578,7 @@
    "feel": "dolly",
    "cut": true,
    "note": "standing bow",
-   "t": 13.9
+   "t": 14.1
   },
   {
    "rig": "compose",
@@ -598,7 +598,7 @@
    "feel": "dolly",
    "cut": true,
    "note": "sit",
-   "t": 17.1
+   "t": 17.3
   },
   {
    "rig": "compose",
@@ -618,7 +618,7 @@
    "feel": "dolly",
    "cut": true,
    "note": "look around",
-   "t": 22.4
+   "t": 22.6
   },
   {
    "rig": "compose",
@@ -638,7 +638,7 @@
    "feel": "dolly",
    "cut": true,
    "note": "suriashi",
-   "t": 26.5
+   "t": 26.7
   },
   {
    "rig": "compose",
@@ -658,7 +658,7 @@
    "feel": "dolly",
    "cut": true,
    "note": "stumble",
-   "t": 29.4
+   "t": 29.6
   },
   {
    "rig": "compose",
@@ -678,7 +678,7 @@
    "feel": "dolly",
    "cut": true,
    "note": "fall",
-   "t": 31.6
+   "t": 31.8
   },
   {
    "rig": "compose",
@@ -697,7 +697,7 @@
    "fov": 30,
    "feel": "dolly",
    "cut": true,
-   "t": 37.1,
+   "t": 37.5,
    "note": "the run, tracked from the side"
   }
  ],
